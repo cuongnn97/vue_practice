@@ -30,6 +30,8 @@
 
   </form>
 
+  <router-link to="/about">About</router-link>
+
   <p>Email: {{email}} </p>
   <p>Password: {{password}} </p>
   <p>Role: {{role}} </p>
