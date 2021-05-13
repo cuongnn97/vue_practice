@@ -1,11 +1,22 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link :to="{ name: 'About' }">About</router-link> |
-    <router-link :to="{ name: 'Jobs' }">Jobs</router-link>
+    <router-link :to="{ name: 'Jobs' }">Jobs</router-link> |
+    <router-link :to="{ name: 'SignupForm' }">SignupForm</router-link> |
+    <router-link :to="{ name: 'Calculator' }">Calculator</router-link> |
+    <router-link :to="{ name: 'Chart' }">Chart</router-link>
   </div>
   <router-view/>
 </template>
+<script>
+export default {
+  provide() {
+    return {
+      todoLength: "test provider"
+    }
+  }
+}
+</script>
 
 <style>
 #app {

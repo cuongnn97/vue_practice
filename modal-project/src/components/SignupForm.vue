@@ -23,14 +23,15 @@
       <input type="checkbox" v-model="terms" required/>
       <label>Accept terms and conditions</label>
     </div>
+    <div id="testTeleport">
+
+    </div>
 
     <div class="submit">
       <button>Create an account</button>
     </div>
 
   </form>
-
-  <router-link to="/about">About</router-link>
 
   <p>Email: {{email}} </p>
   <p>Password: {{password}} </p>
@@ -45,7 +46,7 @@ export default {
     return {
       email: '',
       password: '',
-      role: 'designer',
+      role: 'developer',
       terms: false,
       tempSkill: '',
       skills: [],
@@ -66,6 +67,9 @@ export default {
         return skill !== item
       })
     },
+    addNewSkill(skill){
+      console.log(skill);
+    },
     handleSubmit() {
       // validate password
       this.passwordError = this.password.length > 5 ?
@@ -79,7 +83,7 @@ export default {
         console.log('terms accepted: ', this.terms)
       }
     }
-  }
+  },
 }
 </script>
 
@@ -89,7 +93,6 @@ export default {
     margin: 30px auto;
     background: white;
     text-align: left;
-    padding: 40px;
     border-radius: 10px;
   }
   label {

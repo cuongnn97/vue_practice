@@ -13,9 +13,13 @@ export default {
   data() {
     return {
       jobs: [
-        { title: 'Ninja UX Designer', id: 1, details: 'lorem' },
-        { title: 'Ninja Web Developer', id: 2, details: 'lorem' },
-        { title: 'Ninja Vue Developer', id: 3, details: 'lorem' },
+        { title: 'Job 1', id: 1, details: 'lorem' },
+        { title: 'Job 2', id: 2, details: 'lorem' },
+        { title: 'Job 3', id: 3, details: 'lorem' },
+        { title: 'Job 4', id: 4, details: 'lorem4' },
+        { title: 'Job 5', id: 5, details: 'lorem5' },
+        { title: 'Job 6', id: 6, details: 'lorem6' },
+        { title: 'Job 7', id: 7, details: 'lorem7' },
       ],
     }
   }

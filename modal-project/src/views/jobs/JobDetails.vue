@@ -3,14 +3,17 @@
   <!-- <p>The job id is {{ $route.params.id }}</p> -->
   <p>The job id is {{ id }}</p>
   <p>The job name is {{ name }}</p>
+  <p>The provide test is {{ abc }}</p>
 </template>
 
 <script>
 export default {
+  inject: ['todoLength'],
   data() {
     return {
       id: this.$route.params.id,
       name: this.$route.params.name,
+      abc: this.todoLength
     }
   }
 }
