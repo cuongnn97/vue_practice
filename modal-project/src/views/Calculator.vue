@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="calculator">
-      <div class="display">{{ current || "0" }}</div>
+      <div class="display">{{ current || '0' }}</div>
       <div @click="clear" class="button">C</div>
       <div @click="offMusic" class="button">+/-</div>
       <div @click="percent" class="button">%</div>
@@ -29,71 +29,71 @@ export default {
   data() {
     return {
       previous: null,
-      current: "",
+      current: '',
       operator: null,
       operatorClicked: false,
       player: new Audio(),
       src: require('../assets/songs.mp3'),
       isPlaying: false
-    };
+    }
   },
   methods: {
     clear() {
-      this.current = "";
-      this.player.src= this.src;
-      this.player.play();
+      this.current = ''
+      this.player.src = this.src
+      this.player.play()
     },
     percent() {
-      this.current = `${parseFloat(this.current) / 100}`;
+      this.current = `${parseFloat(this.current) / 100}`
     },
     append(number) {
       if (this.operatorClicked) {
-        this.current = "";
-        this.operatorClicked = false;
+        this.current = ''
+        this.operatorClicked = false
       }
-      this.current = `${this.current}${number}`;
+      this.current = `${this.current}${number}`
     },
     dot() {
-      if (this.current.indexOf(".") === -1) {
-        this.append(".");
+      if (this.current.indexOf('.') === -1) {
+        this.append('.')
       }
-      if (this.current.indexOf(".") === 0) {
-        this.current = `0${this.current}`;
+      if (this.current.indexOf('.') === 0) {
+        this.current = `0${this.current}`
       }
     },
     setPrevious() {
-      this.previous = this.current;
-      this.operatorClicked = true;
+      this.previous = this.current
+      this.operatorClicked = true
     },
     plus() {
-      this.operator = (a, b) => a + b;
-      this.setPrevious();
+      this.operator = (a, b) => a + b
+      this.setPrevious()
     },
     minus() {
-      this.operator = (a, b) => a - b;
-      this.setPrevious();
+      this.operator = (a, b) => a - b
+      this.setPrevious()
     },
     times() {
-      this.operator = (a, b) => a * b;
-      this.setPrevious();
+      this.operator = (a, b) => a * b
+      this.setPrevious()
     },
     divide() {
-      this.operator = (a, b) => a / b;
-      this.setPrevious();
+      this.operator = (a, b) => a / b
+      this.setPrevious()
     },
     equal() {
       this.current = `${this.operator(
         parseFloat(this.previous),
         parseFloat(this.current)
-      )}`;
-      this.previous = null;
+      )}`
+      this.previous = null
     },
     offMusic() {
-      this.player.pause();
-      this.isPlaying = false;
+      this.player.pause()
+      this.isPlaying = false
     }
-  },
-};
+  }
+}
 </script>
 <style scoped>
 .calculator {

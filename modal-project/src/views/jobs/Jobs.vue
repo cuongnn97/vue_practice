@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .job h2{
     background: #f4f4f4;
     padding: 20px;

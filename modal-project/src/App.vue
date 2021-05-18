@@ -4,15 +4,15 @@
     <router-link :to="{ name: 'Jobs' }">Jobs</router-link> |
     <router-link :to="{ name: 'SignupForm' }">SignupForm</router-link> |
     <router-link :to="{ name: 'Calculator' }">Calculator</router-link> |
-    <router-link :to="{ name: 'Chart' }">Chart</router-link>
+    <router-link :to="{ name: 'Cart' }">Cart</router-link>
   </div>
-  <router-view/>
+  <router-view />
 </template>
 <script>
 export default {
   provide() {
     return {
-      todoLength: "test provider"
+      todoLength: 'test provider'
     }
   }
 }

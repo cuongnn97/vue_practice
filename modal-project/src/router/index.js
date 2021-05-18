@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import NotFound from '../views/NotFound.vue'
 import Jobs from '../views/jobs/Jobs.vue'
 import Calculator from '../views/Calculator.vue'
-import Chart from '../views/Chart.vue'
+import Cart from '../views/shopping/Cart.vue'
 import JobDetails from '../views/jobs/JobDetails.vue'
 import SignupForm from '../components/SignupForm.vue'
 
@@ -46,9 +46,9 @@ const routes = [
     component: Calculator
   },
   {
-    path: '/chart',
-    name: 'Chart',
-    component: Chart
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   }
 ]
 
