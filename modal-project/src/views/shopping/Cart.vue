@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="$store.state.counter"/>
+    <h1>{{$store.getters.counter}}</h1>
     <Products />
     <CartProducts />
   </div>

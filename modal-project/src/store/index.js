@@ -9,6 +9,9 @@ export default createStore({
   getters: {
     products: state => {
       return state.products;
+    },
+    counter: state => {
+      return state.counter;
     }
   },
   mutations: {
@@ -32,7 +35,6 @@ export default createStore({
         })
         .then(response => response.data)
         .then(products => {
-
           commit('SET_Products', products)
         })
     },
@@ -45,12 +47,8 @@ export default createStore({
         })
         .then(response => response.data)
         .then(products => {
-
           commit('SET_CartedProducts', products)
         })
     },
-    changeCounter({ commit }) {
-      commit('setProducts',2)
-    }
   },
 });

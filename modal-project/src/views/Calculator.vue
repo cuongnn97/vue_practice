@@ -33,15 +33,14 @@ export default {
       operator: null,
       operatorClicked: false,
       player: new Audio(),
-      src: require('../assets/songs.mp3'),
-      isPlaying: false
+      src: require('../assets/songs.mp3')
     }
   },
   methods: {
     clear() {
       this.current = ''
       this.player.src = this.src
-      this.player.play()
+      //this.player.play()
     },
     percent() {
       this.current = `${parseFloat(this.current) / 100}`
@@ -90,7 +89,6 @@ export default {
     },
     offMusic() {
       this.player.pause()
-      this.isPlaying = false
     }
   }
 }

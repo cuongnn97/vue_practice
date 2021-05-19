@@ -2,7 +2,7 @@
   <div class="products_cart">
     <h1>On Cart</h1>
     <div v-for="item in $store.state.carted" :key="item.id">
-      <span>{{ item.name }} - {{item.carted}}</span>
+      <span>{{ item.name }}</span>
       <button @click="deleteCart(item.id)" type="button">
         Delete
       </button>
@@ -20,7 +20,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.items)
     this.$store.dispatch('cartedProducts');
   },
   methods: {
@@ -33,9 +32,6 @@ export default {
     }
   },
   computed: {
-    todos() {
-      return this.$store.state.products
-    }
   }
 }
 </script>

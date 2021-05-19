@@ -1,8 +1,8 @@
 <template>
   <div class="products">
     <h1>Products</h1>
-    <div v-for="item in $store.state.products" :key="item.id">
-      <span>{{ item.name }} - {{item.carted}}</span>
+    <div v-for="item in $store.getters.products" :key="item.id">
+      <span>{{ item.name }}</span>
       <button @click="addToCart(item.id)" type="button">
         Add to cart
       </button>
@@ -13,22 +13,19 @@
 import axios from 'axios'
 export default {
   data() {
-    return {
-      products: [],
-    }
+    return {}
   },
   mounted() {
     this.$store.dispatch('loadProducts')
   },
   methods: {
     addToCart(id) {
-      axios.patch('http://localhost:8000/products/'+id, {
+      axios.patch('http://localhost:8000/products/' + id, {
         carted: true
       })
-      this.$store.dispatch('loadProducts');
+      this.$store.dispatch('loadProducts')
       this.$store.dispatch('cartedProducts')
-    },
-
+    }
   },
   computed: {
     todos() {

@@ -21,7 +21,7 @@
       "price": 30000,
       "quantity": 10,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum tellus, suscipit quis condimentum sit amet, commodo at orci. Curabitur hendrerit tellus ex, in facilisis enim feugiat at. Phasellus vel f",
-      "carted": false,
+      "carted": true,
       "id": 3
     },
     {
@@ -38,7 +38,7 @@
       "price": 12000,
       "quantity": 10,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum tellus, suscipit quis condimentum sit amet, commodo at orci. Curabitur hendrerit tellus ex, in facilisis enim feugiat at. Phasellus vel f",
-      "carted": false
+      "carted": true
     },
     {
       "id": 6,
@@ -46,7 +46,7 @@
       "price": 5000,
       "quantity": 10,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum tellus, suscipit quis condimentum sit amet, commodo at orci. Curabitur hendrerit tellus ex, in facilisis enim feugiat at. Phasellus vel f",
-      "carted": false
+      "carted": true
     },
     {
       "id": 7,
@@ -54,7 +54,7 @@
       "price": 7000,
       "quantity": 10,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum tellus, suscipit quis condimentum sit amet, commodo at orci. Curabitur hendrerit tellus ex, in facilisis enim feugiat at. Phasellus vel f",
-      "carted": true
+      "carted": false
     },
     {
       "id": 8,
@@ -62,7 +62,7 @@
       "price": 5000,
       "quantity": 10,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum tellus, suscipit quis condimentum sit amet, commodo at orci. Curabitur hendrerit tellus ex, in facilisis enim feugiat at. Phasellus vel f",
-      "carted": true
+      "carted": false
     },
     {
       "id": 9,
@@ -78,7 +78,7 @@
       "price": 10000,
       "quantity": 10,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum tellus, suscipit quis condimentum sit amet, commodo at orci. Curabitur hendrerit tellus ex, in facilisis enim feugiat at. Phasellus vel f",
-      "carted": false
+      "carted": true
     }
   ]
 }

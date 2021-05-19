@@ -1,6 +1,5 @@
 <template>
   <h1>Job Details</h1>
-  <!-- <p>The job id is {{ $route.params.id }}</p> -->
   <p>The job id is {{ id }}</p>
   <p>The job name is {{ name }}</p>
   <p>The provide test is {{ provider }}</p>

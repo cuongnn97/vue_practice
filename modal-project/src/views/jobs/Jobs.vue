@@ -13,9 +13,9 @@ export default {
   data() {
     return {
       jobs: [
-        { title: 'Job 1', id: 1, details: 'lorem' },
-        { title: 'Job 2', id: 2, details: 'lorem' },
-        { title: 'Job 3', id: 3, details: 'lorem' },
+        { title: 'Job 1', id: 1, details: 'lorem1' },
+        { title: 'Job 2', id: 2, details: 'lorem2' },
+        { title: 'Job 3', id: 3, details: 'lorem3' },
         { title: 'Job 4', id: 4, details: 'lorem4' },
         { title: 'Job 5', id: 5, details: 'lorem5' },
         { title: 'Job 6', id: 6, details: 'lorem6' },
