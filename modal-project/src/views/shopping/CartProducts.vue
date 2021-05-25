@@ -15,24 +15,22 @@ export default {
   data() {
     return {
       products: [],
-      string: this.$store.state.counter,
-      items: this.$store.getters.doneTodos
+      carted: this.$store.state.carted,
+      string: this.$store.state.counter
     }
   },
-  mounted() {
-    this.$store.dispatch('cartedProducts');
+  created() {
+    this.$store.dispatch('loadProducts')
   },
   methods: {
     deleteCart(id) {
-      axios.patch('http://localhost:8000/products/'+id, {
+      axios.patch('http://localhost:8000/products/' + id, {
         carted: false
       })
-      this.$store.dispatch('loadProducts');
-      this.$store.dispatch('cartedProducts')
+      this.$store.dispatch('loadProducts')
     }
   },
-  computed: {
-  }
+  computed: {}
 }
 </script>
 <style>

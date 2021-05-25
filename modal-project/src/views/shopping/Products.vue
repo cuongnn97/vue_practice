@@ -13,9 +13,11 @@
 import axios from 'axios'
 export default {
   data() {
-    return {}
+    return {
+      getProducts: this.$store.getters.products
+    }
   },
-  mounted() {
+  created() {
     this.$store.dispatch('loadProducts')
   },
   methods: {
@@ -24,7 +26,6 @@ export default {
         carted: true
       })
       this.$store.dispatch('loadProducts')
-      this.$store.dispatch('cartedProducts')
     }
   },
   computed: {

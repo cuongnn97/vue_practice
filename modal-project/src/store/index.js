@@ -16,13 +16,11 @@ export default createStore({
   },
   mutations: {
     SET_Products(state, products) {
-      const notCartedProducts = products.filter(product => !product.carted);
-      state.products = notCartedProducts;
+      state.products = products;
     },
     SET_CartedProducts(state, products) {
-      const cartedProducts = products.filter(product => product.carted);
-      state.carted = cartedProducts
-      state.counter = cartedProducts.length;
+      state.carted = products;
+      state.counter = products.length;
     },
   },
   actions: {
@@ -35,19 +33,8 @@ export default createStore({
         })
         .then(response => response.data)
         .then(products => {
-          commit('SET_Products', products)
-        })
-    },
-    cartedProducts({ commit }) {
-      axios
-        .get('http://localhost:8000/products', {
-          headers: {
-            'Ocp-Apim-Subscription-Key': 'your key',
-          }
-        })
-        .then(response => response.data)
-        .then(products => {
-          commit('SET_CartedProducts', products)
+          commit('SET_Products', products.filter(product => !product.carted))
+          commit('SET_CartedProducts', products.filter(product => product.carted))
         })
     },
   },
