@@ -1,7 +1,5 @@
 <template>
-  <div v-for="item in dataOffSet" :key="item.id">
-    <span>{{ item.id }}</span>
-  </div>
+  <Table :data="dataOffSet"/>
   <Pagination
     :totalPages="paginations.length / perPage"
     :perPage="perPage"
@@ -13,6 +11,7 @@
 <script>
 import Pagination from './Pagination'
 import axios from 'axios'
+import Table from './Table'
 
 export default {
   name: 'Home',
@@ -50,7 +49,8 @@ export default {
     }
   },
   components: {
-    Pagination
+    Pagination,
+    Table
   }
 }
 </script>

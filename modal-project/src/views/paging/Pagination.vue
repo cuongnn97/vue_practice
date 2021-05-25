@@ -121,15 +121,26 @@ export default {
 </script>
 <style scoped>
 .pagination {
-  list-style-type: none;
+  float: left;
+  margin: 0;
+  margin-left: -2rem;
 }
-
 .pagination-item {
   display: inline-block;
 }
 
 .active {
-  background-color: #4aae9b;
+  background-color: #aaa;
   color: #ffffff;
+}
+button {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  border-radius: 0px;
+}
+button:hover {
+  cursor: pointer;
+  text-decoration-line: underline;
 }
 </style>
