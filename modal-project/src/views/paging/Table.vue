@@ -1,18 +1,24 @@
 <template>
   <h2>Paging Example</h2>
   <table class="table-paging">
-    <tr>
-      <th width="10%">ID</th>
-      <th width="10%">User ID</th>
-      <th width="60%">Title</th>
-      <th width="20%">Completed</th>
-    </tr>
-    <tr v-for="item in data" :key="item.id">
-      <td>{{ item.id }}</td>
-      <td>{{ item.userId }}</td>
-      <td>{{ item.title }}</td>
-      <td><input type="checkbox" id="checkbox" v-model="item.completed"></td>
-    </tr>
+    <thead>
+      <tr>
+        <th width="10%">ID</th>
+        <th width="10%">User ID</th>
+        <th width="60%">Title</th>
+        <th width="20%">Completed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in data" :key="item.id">
+        <td>{{ item.id }}</td>
+        <td>{{ item.userId }}</td>
+        <td>{{ item.title }}</td>
+        <td>
+          <input type="checkbox" id="checkbox" v-model="item.completed" />
+        </td>
+      </tr>
+    </tbody>
   </table>
 </template>
 

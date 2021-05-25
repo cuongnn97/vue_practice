@@ -25,7 +25,7 @@ export default {
   },
   created() {
     axios
-      .get('http://localhost:8000/paging?', {
+      .get('http://localhost:8000/paging', {
         headers: {
           'Ocp-Apim-Subscription-Key': 'your key'
         }
