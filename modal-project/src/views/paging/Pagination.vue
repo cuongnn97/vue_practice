@@ -76,12 +76,17 @@ export default {
     },
     pages() {
       const range = []
-      for (
-        let i = this.startPage;
-        i <=
-        Math.min(this.startPage + this.maxVisibleButtons - 1, this.totalPages);
-        i += 1
-      ) {
+      // for (
+      //   let i = this.startPage;
+      //   i <= this.startPage + this.maxVisibleButtons - 1;
+      //   i++
+      // ) {
+      //   range.push({
+      //     name: i,
+      //     isDisabled: i === this.currentPage
+      //   })
+      // }
+      for (let i = 1; i <= this.totalPages; i++) {
         range.push({
           name: i,
           isDisabled: i === this.currentPage
@@ -132,12 +137,6 @@ export default {
 .active {
   background-color: #aaa;
   color: #ffffff;
-}
-button {
-  background-color: white;
-  border: 1px solid black;
-  color: black;
-  border-radius: 0px;
 }
 button:hover {
   cursor: pointer;

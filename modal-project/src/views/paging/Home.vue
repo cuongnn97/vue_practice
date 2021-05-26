@@ -1,5 +1,5 @@
 <template>
-  <Table :data="dataOffSet"/>
+  <Table :data="dataOffSet" />
   <Pagination
     :totalPages="paginations.length / perPage"
     :perPage="perPage"
@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Pagination from './Pagination'
 import axios from 'axios'
+import Pagination from './Pagination'
 import Table from './Table'
 
 export default {
@@ -41,7 +41,7 @@ export default {
       this.getDataOffSet(page)
     },
     getDataOffSet(page) {
-      const dataOffSet = this.paginations.slice(
+      let dataOffSet = this.paginations.slice(
         (page - 1) * 10,
         this.perPage * page
       )
