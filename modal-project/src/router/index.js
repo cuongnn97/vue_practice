@@ -5,7 +5,7 @@ import Jobs from '../views/jobs/Jobs.vue'
 import Calculator from '../views/Calculator.vue'
 import Cart from '../views/shopping/Cart.vue'
 import JobDetails from '../views/jobs/JobDetails.vue'
-import Homepage from '../views/sony/Homepage.vue'
+import Homepage from '../views/sony/homepage/Homepage.vue'
 import Login from '../views/sony/Login.vue'
 import SignupForm from '../components/SignupForm.vue'
 

@@ -57,7 +57,7 @@
         class="download-button"
         target="_blank"
         data-no-turbolink="false"
-        id="group_orchard"
+        id="user_orchard"
         href="/orchard_files/download"
         >チェックした曲のThe Orchard Bulk Uploadファイルをダウンロード</a
       >

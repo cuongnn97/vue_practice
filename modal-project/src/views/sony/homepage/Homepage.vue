@@ -13,7 +13,11 @@
           </h1>
           <CopyrightOwned />
           <CopyrightGroup />
+          <CopyrightPublisher />
+          <UntransferContract />
         </div>
+      <div class="margin">
+      </div>
       </div>
     </div>
     <Footer />
@@ -21,17 +25,21 @@
 </template>
 
 <script>
-import Header from './Header'
-import Footer from './Footer'
-import CopyrightOwned from './homepage/CopyrightOwned'
-import CopyrightGroup from './homepage/CopyrightGroup'
+import Header from '../Header'
+import Footer from '../Footer'
+import CopyrightOwned from './components/CopyrightOwned'
+import CopyrightGroup from './components/CopyrightGroup'
+import CopyrightPublisher from './components/CopyrightPublisher'
+import UntransferContract from './components/UntransferContract'
 export default {
   data() {},
   components: {
     Header,
     Footer,
     CopyrightOwned,
-    CopyrightGroup
+    CopyrightGroup,
+    CopyrightPublisher,
+    UntransferContract
   }
 }
 </script>
@@ -71,5 +79,8 @@ export default {
   font-size: 1vw;
   padding: 0.5rem 2rem 0.5rem 2rem;
   border-radius: 3px;
+}
+.margin {
+  height: 5rem;
 }
 </style>
