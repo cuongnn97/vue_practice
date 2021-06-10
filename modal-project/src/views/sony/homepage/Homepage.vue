@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :rightMenu="true"/>
+    <Header :rightMenu="true" />
     <div class="main-content">
       <div class="container">
         <div class="alert">
@@ -16,11 +16,10 @@
           <CopyrightPublisher />
           <UntransferContract />
         </div>
-      <div class="margin">
+        <div class="margin"></div>
       </div>
-      </div>
+      <Footer />
     </div>
-    <Footer />
   </div>
 </template>
 

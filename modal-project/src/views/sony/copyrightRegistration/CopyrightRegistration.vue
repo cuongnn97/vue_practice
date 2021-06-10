@@ -136,6 +136,7 @@
               <input
                 :value="copyrightCategory.id"
                 @change="addCategory(copyrightCategory.id)"
+                class="checkbox-input"
                 type="checkbox"
                 checked
               />
@@ -143,7 +144,7 @@
             </div>
           </div>
           <div class="action-form">
-            <a class="cancel-button" href="/">キャンセル</a>
+            <a class="cancel-button" href="/homepage">キャンセル</a>
             <a class="register-button" href="/creative_works">著作物登録</a>
           </div>
         </div>
@@ -348,6 +349,7 @@ body {
   float: left;
   text-align: left;
   margin-bottom: 1rem;
+  background-color: white;
 }
 .action-form {
   width: 100%;
