@@ -9,7 +9,7 @@
         <div class="content">
           <h1>
             私のページ
-            <a class="primary-button" href="">著作物登録</a>
+            <a class="primary-button" href="/creative_works/new">著作物登録</a>
           </h1>
           <CopyrightOwned />
           <CopyrightGroup />

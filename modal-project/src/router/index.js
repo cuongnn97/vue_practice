@@ -4,10 +4,12 @@ import NotFound from '../views/NotFound.vue'
 import Jobs from '../views/jobs/Jobs.vue'
 import Calculator from '../views/Calculator.vue'
 import Cart from '../views/shopping/Cart.vue'
+import SignupForm from '../components/SignupForm.vue'
 import JobDetails from '../views/jobs/JobDetails.vue'
+//SONY
 import Homepage from '../views/sony/homepage/Homepage.vue'
 import Login from '../views/sony/Login.vue'
-import SignupForm from '../components/SignupForm.vue'
+import CopyrightRegistration from '../views/sony/copyrightRegistration/CopyrightRegistration.vue'
 
 const routes = [
   {
@@ -42,6 +44,7 @@ const routes = [
     name: 'Cart',
     component: Cart
   },
+  //SONY
   {
     path: '/homepage',
     name: 'Homepage',
@@ -52,6 +55,13 @@ const routes = [
     name: 'Login',
     component: Login
   },
+  {
+    path: '/creative_works/new',
+    name: 'CopyrightRegistration',
+    component: CopyrightRegistration
+  },
+
+  //END SONY
   //redirect
   {
     path: '/all-jobs',
