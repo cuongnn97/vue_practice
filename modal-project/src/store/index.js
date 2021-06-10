@@ -15,12 +15,12 @@ export default createStore({
     }
   },
   mutations: {
-    SET_Products(state, products) {
-      state.products = products;
-    },
     SET_CartedProducts(state, products) {
       state.carted = products;
       state.counter = products.length;
+    },
+    SET_Products(state, products) {
+      state.products = products;
     },
   },
   actions: {

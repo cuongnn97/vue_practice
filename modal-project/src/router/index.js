@@ -5,6 +5,8 @@ import Jobs from '../views/jobs/Jobs.vue'
 import Calculator from '../views/Calculator.vue'
 import Cart from '../views/shopping/Cart.vue'
 import JobDetails from '../views/jobs/JobDetails.vue'
+import Homepage from '../views/sony/Homepage.vue'
+import Login from '../views/sony/Login.vue'
 import SignupForm from '../components/SignupForm.vue'
 
 const routes = [
@@ -24,17 +26,7 @@ const routes = [
     component: JobDetails,
     props: true
   },
-  //redirect
-  {
-    path: '/all-jobs',
-    redirect: '/jobs'
-  },
-  // catch all 404
-  {
-    path: '/:catchAll(.*)',
-    name: 'NotFound',
-    component: NotFound,
-  },
+
   {
     path: '/signupForm',
     name: 'SignupForm',
@@ -49,6 +41,27 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/homepage',
+    name: 'Homepage',
+    component: Homepage
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  //redirect
+  {
+    path: '/all-jobs',
+    redirect: '/jobs'
+  },
+  // catch all 404
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound,
   }
 ]
 

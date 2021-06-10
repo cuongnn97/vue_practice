@@ -92,7 +92,6 @@ export default {
           isDisabled: i === this.currentPage
         })
       }
-
       return range
     },
     isInFirstPage() {
@@ -133,7 +132,6 @@ export default {
 .pagination-item {
   display: inline-block;
 }
-
 .active {
   background-color: #aaa;
   color: #ffffff;
