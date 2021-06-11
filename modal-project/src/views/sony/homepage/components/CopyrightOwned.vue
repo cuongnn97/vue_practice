@@ -63,7 +63,7 @@
       >
     </div>
     <div v-else class="notification">
-      ログインしました。
+      著作権はありません
     </div>
   </div>
 </template>

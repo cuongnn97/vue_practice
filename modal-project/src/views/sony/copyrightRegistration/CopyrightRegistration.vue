@@ -171,36 +171,36 @@ export default {
         { id: 4, name: 'red' }
       ],
       subGenres: [
-        { id: 1, genresId: 1, name: 'blue1' },
-        { id: 2, genresId: 1, name: 'blue2' },
-        { id: 3, genresId: 1, name: 'blue3' },
-        { id: 4, genresId: 1, name: 'blue4' },
-        { id: 5, genresId: 2, name: 'white1' },
-        { id: 6, genresId: 2, name: 'white2' },
-        { id: 7, genresId: 2, name: 'white3' },
-        { id: 8, genresId: 2, name: 'white4' },
-        { id: 9, genresId: 3, name: 'green1' },
-        { id: 10, genresId: 3, name: 'green2' },
-        { id: 11, genresId: 3, name: 'green3' },
-        { id: 12, genresId: 3, name: 'green4' },
-        { id: 13, genresId: 4, name: 'red1' },
-        { id: 14, genresId: 4, name: 'red2' },
-        { id: 15, genresId: 4, name: 'red3' },
-        { id: 16, genresId: 4, name: 'red4' }
+        { id: 1, genreId: 1, name: 'blue1' },
+        { id: 2, genreId: 1, name: 'blue2' },
+        { id: 3, genreId: 1, name: 'blue3' },
+        { id: 4, genreId: 1, name: 'blue4' },
+        { id: 5, genreId: 2, name: 'white1' },
+        { id: 6, genreId: 2, name: 'white2' },
+        { id: 7, genreId: 2, name: 'white3' },
+        { id: 8, genreId: 2, name: 'white4' },
+        { id: 9, genreId: 3, name: 'green1' },
+        { id: 10, genreId: 3, name: 'green2' },
+        { id: 11, genreId: 3, name: 'green3' },
+        { id: 12, genreId: 3, name: 'green4' },
+        { id: 13, genreId: 4, name: 'red1' },
+        { id: 14, genreId: 4, name: 'red2' },
+        { id: 15, genreId: 4, name: 'red3' },
+        { id: 16, genreId: 4, name: 'red4' }
       ],
       pickedSubgenres: [],
       copyrightCategories: [
         { id: 1, name: '演奏権等' },
-        { id: 2, name: '出版権等' },
-        { id: 3, name: '映画への録音' },
-        { id: 4, name: 'ゲームに供する目的で行う複製' },
-        { id: 5, name: '放送・有線放送' },
-        { id: 6, name: '業務用通信カラオケ' },
-        { id: 7, name: '録音権等' },
-        { id: 8, name: '貸与権' },
-        { id: 9, name: 'ビデオグラムへの録音' },
-        { id: 10, name: '広告目的で行う複製' },
-        { id: 11, name: 'インタラクティブ配信' }
+        { id: 2, name: '映画への録音' },
+        { id: 3, name: '出版権等' },
+        { id: 4, name: '放送・有線放送' },
+        { id: 5, name: 'ゲームに供する目的で行う複製' },
+        { id: 6, name: '録音権等' },
+        { id: 7, name: '業務用通信カラオケ' },
+        { id: 8, name: 'ビデオグラムへの録音' },
+        { id: 9, name: '貸与権' },
+        { id: 10, name: 'インタラクティブ配信' },
+        { id: 11, name: '広告目的で行う複製' }
       ],
       formElements: {
         composerName: '',
@@ -232,7 +232,7 @@ export default {
     onChangeGenre(event) {
       this.pickedSubgenres = []
       for (let i = 0; i < this.subGenres.length; i++) {
-        if (this.subGenres[i].genresId.toString() === event.target.value) {
+        if (this.subGenres[i].genreId.toString() === event.target.value) {
           this.pickedSubgenres.push(this.subGenres[i])
         }
       }

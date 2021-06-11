@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>未譲渡契約</h2>
-    <div v-if="ownedCopyrights.length" class="copyright-list">
+    <div v-show="ownedCopyrights.length" class="copyright-list">
       <h3>cuong</h3>
       <table>
         <thead>
@@ -16,7 +16,6 @@
             v-for="ownedCopyright in ownedCopyrights"
             :key="ownedCopyright.id"
           >
-
             <td>{{ ownedCopyright.creativeWork }}</td>
             <td>
               <span style="font-weight:bold">Original</span>
@@ -31,18 +30,11 @@
               </ul>
             </td>
             <td>
-
-              <button
-                disabled
-                >Waiting</button
-              >
+              <button disabled>Waiting</button>
             </td>
           </tr>
         </tbody>
       </table>
-    </div>
-    <div v-else class="notification">
-      ログインしました。
     </div>
   </div>
 </template>
@@ -92,7 +84,7 @@ export default {
       if (index > -1) {
         this.ownedCopyrightIds.splice(index, 1)
       }
-    },
+    }
   }
 }
 </script>
@@ -124,11 +116,13 @@ th {
   padding: 13px 11px;
   text-align: left;
   font-size: 14px;
+  border-bottom: 1px solid #2224261a;
 }
 td {
   padding-top: 0.5rem;
   text-align: left;
   font-size: 14px;
+  border-bottom: 1px solid #2224261a;
 }
 td li {
   margin-left: -1.5rem;
@@ -139,7 +133,7 @@ td button {
   float: right;
   margin-right: 2rem;
   border-radius: 5px;
-  font-weight:bold
+  font-weight: bold;
 }
 .notification {
   width: 96.5%;
@@ -151,5 +145,11 @@ td button {
   border-radius: 3px;
   font-size: 14px;
 }
+table {
+  border: 1px solid #2224261a;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 0.28571429rem;
 
+}
 </style>

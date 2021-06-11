@@ -22,7 +22,7 @@
       </h3>
     </div>
     <div v-else class="notification">
-      著作権はありません
+      グループはありません
     </div>
   </div>
 </template>

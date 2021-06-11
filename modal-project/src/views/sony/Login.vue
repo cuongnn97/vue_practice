@@ -6,36 +6,39 @@
         <div v-show="alert" class="alert">
           アカウント登録もしくはログインしてください。
         </div>
-        <div class="loginForm">
-          <h1>
-            サインイン
-          </h1>
-          <div class="fieldsRequired">
-            <label>Eメール</label><label style="color:red;margin-left:0.2rem">*</label>
-            <input type="text" />
-          </div>
-          <div class="fieldsRequired">
-            <label>パスワード</label><label style="color:red;margin-left:0.2rem">*</label>
-            <input type="text" />
-          </div>
-          <div class="checkbox">
-            <input type="checkbox" />
-            <span>ログインを記憶する</span>
-          </div>
-          <div class="action">
-            <a href="/users/password/new">パスワードをお忘れですか?</a>
-            <input
-              type="submit"
-              name="commit"
-              value="サインイン"
-              class="fluid ui button"
-              data-disable-with="サインイン"
-            />
-            <div class="sign-up">
-              <a href="/users/sign_up">サインアップ</a>
+        <form>
+          <div class="loginForm">
+            <h1>
+              サインイン
+            </h1>
+            <div class="fieldsRequired">
+              <label>Eメール</label
+              ><label style="color:red;margin-left:0.2rem">*</label>
+              <input name="email" type="text" required />
+            </div>
+            <div class="fieldsRequired">
+              <label>パスワード</label
+              ><label style="color:red;margin-left:0.2rem">*</label>
+              <input name="password" type="text" required />
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" />
+              <span>ログインを記憶する</span>
+            </div>
+            <div class="action">
+              <a href="/users/password/new">パスワードをお忘れですか?</a>
+              <input
+                type="submit"
+                value="サインイン"
+                class="fluid ui button"
+                data-disable-with="サインイン"
+              />
+              <div class="sign-up">
+                <a href="/users/sign_up">サインアップ</a>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <Footer />
@@ -47,7 +50,7 @@ import Footer from './Footer'
 export default {
   data() {
     return {
-      alert: false,
+      alert: false
     }
   },
   components: {
