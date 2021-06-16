@@ -30,10 +30,7 @@
 export default {
   data() {
     return {
-      publishers: [
-        'publisher1',
-        'publisher2'
-      ]
+      publishers: ['publisher1', 'publisher2']
     }
   }
 }

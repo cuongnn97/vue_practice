@@ -41,14 +41,8 @@
               </ul>
             </td>
             <td>
-              <a
-                href=""
-                >著作権譲渡</a
-              >
-              <a
-                href=""
-                >編集</a
-              >
+              <a href="">著作権譲渡</a>
+              <a href="">編集</a>
             </td>
           </tr>
         </tbody>
@@ -113,7 +107,7 @@ export default {
       if (index > -1) {
         this.ownedCopyrightIds.splice(index, 1)
       }
-    },
+    }
   }
 }
 </script>
@@ -180,8 +174,6 @@ td a {
   background-color: #e0e1e2;
   text-decoration: none;
   color: #00000099;
-  text-align: center;
-  margin-bottom: 0.1rem;
   padding: 8px 15px;
   border-radius: 5px;
   font-weight: bold;

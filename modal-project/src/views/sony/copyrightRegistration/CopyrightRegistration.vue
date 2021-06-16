@@ -65,7 +65,6 @@
             <select
               name="genres"
               id="genres"
-              form="genresForm"
               @change="onChangeGenre($event)"
               v-model="formElements.genre"
             >
@@ -83,7 +82,6 @@
             <select
               name="subGenres"
               id="subGenres"
-              form="subGenresForm"
               v-model="formElements.subGenre"
             >
               <option value="0" selected></option>
@@ -120,7 +118,7 @@
             />
           </div>
           <div class="fields">
-            <label>著作物ファイル </label>
+            <label>著作物ファイル</label>
             <input
               @change="onFileChange($event, 'copyrightFile')"
               id="input-text"

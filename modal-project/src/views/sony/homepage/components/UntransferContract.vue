@@ -110,6 +110,11 @@ h3 {
 table {
   width: 100%;
   margin-top: 1rem;
+  border: 1px solid #2224261a;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 0.28571429rem;
+  border-bottom: none;
 }
 th {
   background-color: #f9fafb;
@@ -144,12 +149,5 @@ td button {
   border: 1px solid #3dc3c3;
   border-radius: 3px;
   font-size: 14px;
-}
-table {
-  border: 1px solid #2224261a;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: 0.28571429rem;
-
 }
 </style>

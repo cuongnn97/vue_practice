@@ -76,7 +76,6 @@ body {
 }
 .container {
   width: 60%;
-  height: 100px;
   margin: 0 auto;
 }
 .content h1 {

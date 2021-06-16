@@ -17,12 +17,13 @@
 </template>
 <script>
 export default {
-  props: ['rightMenu'],
-  data() {
-    return {
-      rightMenu: this.rightMenu
-    }
-  }
+  props: {
+    rightMenu: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+  },
 }
 </script>
 <style scoped>

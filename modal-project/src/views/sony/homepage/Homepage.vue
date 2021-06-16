@@ -31,7 +31,6 @@ import CopyrightGroup from './components/CopyrightGroup'
 import CopyrightPublisher from './components/CopyrightPublisher'
 import UntransferContract from './components/UntransferContract'
 export default {
-  data() {},
   components: {
     Header,
     Footer,
