@@ -133,6 +133,6 @@ body {
   border: none;
 }
 .margin {
-  height: 70rem;
+  margin-top: 20rem;
 }
 </style>

@@ -49,7 +49,6 @@ export default {
 }
 .container {
   width: 60%;
-  height: 100px;
   margin: 0 auto;
 }
 .alert {

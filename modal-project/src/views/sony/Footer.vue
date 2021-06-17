@@ -8,15 +8,11 @@ export default {}
 </script>
 <style scoped>
 .footer {
+  position: absolute;
   font-size: 14px;
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
-  padding-right: 0.8rem;
   text-align: center;
   border: 1px solid #dedede;
   background-color: white;
-  margin-top: 4rem;
 }
 </style>

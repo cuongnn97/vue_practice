@@ -111,10 +111,8 @@ table {
   width: 100%;
   margin-top: 1rem;
   border: 1px solid #2224261a;
-  border-collapse: separate;
   border-spacing: 0;
   border-radius: 0.28571429rem;
-  border-bottom: none;
 }
 th {
   background-color: #f9fafb;
@@ -128,6 +126,9 @@ td {
   text-align: left;
   font-size: 14px;
   border-bottom: 1px solid #2224261a;
+}
+tr:last-child td {
+  border-bottom: none;
 }
 td li {
   margin-left: -1.5rem;

@@ -12,6 +12,7 @@ import Login from '../views/sony/Login.vue'
 import CopyrightRegistration from '../views/sony/copyrightRegistration/CopyrightRegistration.vue'
 import GroupRegistration from '../views/sony/groupRegistration/GroupRegistration.vue'
 import PublisherRegistration from '../views/sony/publisherRegistration/PublisherRegistration.vue'
+import GroupInformation from '../views/sony/groupRegistration/GroupInformation.vue'
 
 const routes = [
   {
@@ -71,6 +72,11 @@ const routes = [
     path: '/publishers/new',
     name: 'PublisherRegistration',
     component: PublisherRegistration
+  },
+  {
+    path: '/groups/group_id',
+    name: 'GroupInformation',
+    component: GroupInformation
   },
   //END SONY
   //redirect

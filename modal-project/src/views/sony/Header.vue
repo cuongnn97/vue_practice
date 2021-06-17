@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="logo">
-      <a href="/">
+      <a href="/homepage">
         <img src="../../assets/sonylogo.png" alt="a" />
       </a>
     </div>
@@ -22,8 +22,8 @@ export default {
       type: Boolean,
       required: true,
       default: false
-    },
-  },
+    }
+  }
 }
 </script>
 <style scoped>

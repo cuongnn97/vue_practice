@@ -18,7 +18,7 @@
       <h3 v-for="(group, i) in groups" :key="i">
         {{ group }}が所有する著作権一覧
         <a id="edit-button" href="">編集</a>
-        <a id="group-registration-button" href="">グループ詳細</a>
+        <a id="group-registration-button" href="groups/group_id">グループ詳細</a>
       </h3>
     </div>
     <div v-else class="notification">
