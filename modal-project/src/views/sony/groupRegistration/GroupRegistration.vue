@@ -43,8 +43,8 @@
         </form>
       </div>
       <div class="margin"></div>
-    </div>
     <Footer />
+    </div>
   </div>
 </template>
 <script>

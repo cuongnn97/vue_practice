@@ -3,13 +3,13 @@
     <Header :rightMenu="true" />
     <div class="main-content">
       <div class="container">
-        <form
-          class="ui form"
-          action="/groups"
-          accept-charset="UTF-8"
-          method="post"
-        >
-          <div class="content">
+        <div class="content">
+          <form
+            class="ui form"
+            action="/groups"
+            accept-charset="UTF-8"
+            method="post"
+          >
             <h1>
               出版社登録
             </h1>
@@ -48,12 +48,12 @@
                 class="ui primary button"
               />
             </div>
-          </div>
-        </form>
+          </form>
+          <div class="margin"></div>
+        </div>
       </div>
-      <div class="margin"></div>
+      <Footer />
     </div>
-    <Footer />
   </div>
 </template>
 <script>
@@ -86,7 +86,6 @@ body {
 }
 .container {
   width: 60%;
-  height: 100px;
   margin: 0 auto;
 }
 .content h1 {
@@ -144,6 +143,6 @@ body {
   border: none;
 }
 .margin {
-  height: 70rem;
+  height: 20rem;
 }
 </style>

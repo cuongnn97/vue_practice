@@ -49,10 +49,10 @@
             <a href="/homepage">戻る</a>
           </div>
         </div>
+        <div class="margin"></div>
       </div>
+      <Footer />
     </div>
-    <div class="margin"></div>
-    <Footer />
   </div>
 </template>
 <script>
@@ -140,6 +140,6 @@ a {
   margin-left: 0.5rem;
 }
 .margin {
-  margin-top: 20rem
+  margin-top: 20rem;
 }
 </style>

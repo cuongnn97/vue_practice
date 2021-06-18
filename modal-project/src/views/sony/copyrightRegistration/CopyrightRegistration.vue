@@ -146,10 +146,10 @@
             <a class="register-button" href="/creative_works">著作物登録</a>
           </div>
         </div>
+        <div class="margin"></div>
       </div>
-      <div class="margin"></div>
+      <Footer />
     </div>
-    <Footer />
   </div>
 </template>
 <script>
@@ -270,7 +270,6 @@ body {
 }
 .container {
   width: 60%;
-  height: 100px;
   margin: 0 auto;
 }
 .content h1 {
@@ -378,6 +377,6 @@ body {
   margin-left: 0.3rem;
 }
 .margin {
-  height: 70rem;
+  height: 20rem;
 }
 </style>
