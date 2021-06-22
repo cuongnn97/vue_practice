@@ -3,13 +3,13 @@
     <Header :rightMenu="true" />
     <div class="main-content">
       <div class="container">
-        <form
-          class="ui form"
-          action="/groups"
-          accept-charset="UTF-8"
-          method="post"
-        >
-          <div class="content">
+        <div class="content">
+          <form
+            class="ui form"
+            action="/groups"
+            accept-charset="UTF-8"
+            method="post"
+          >
             <h1>
               グループ登録
             </h1>
@@ -39,11 +39,10 @@
                 class="ui primary button"
               />
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-      <div class="margin"></div>
-    <Footer />
+      <Footer />
     </div>
   </div>
 </template>
@@ -72,7 +71,8 @@ body {
 .main-content {
   margin-top: 2rem;
   width: 100%;
-  height: fit-content;
+  position: relative;
+  height: 100vh;
 }
 .container {
   width: 60%;
@@ -131,8 +131,5 @@ body {
   font-size: 14px;
   margin-left: 0.3rem;
   border: none;
-}
-.margin {
-  margin-top: 20rem;
 }
 </style>

@@ -33,14 +33,12 @@
               />
               <input
                 id="input-button"
-                placeholder="作曲者ID"
                 type="button"
                 @click="addCoauthor"
                 value="ADD"
               />
               <input
                 id="input-button-delete"
-                placeholder="作曲者ID"
                 type="button"
                 @click="deleteCoauthor"
                 value="DELETE"
@@ -146,7 +144,6 @@
             <a class="register-button" href="/creative_works">著作物登録</a>
           </div>
         </div>
-        <div class="margin"></div>
       </div>
       <Footer />
     </div>
@@ -266,11 +263,13 @@ body {
 .main-content {
   margin-top: 2rem;
   width: 100%;
+  position: relative;
   height: fit-content;
 }
 .container {
   width: 60%;
   margin: 0 auto;
+  padding-bottom: 10rem;
 }
 .content h1 {
   width: 100%;
@@ -375,8 +374,5 @@ body {
   font-weight: bold;
   font-size: 14px;
   margin-left: 0.3rem;
-}
-.margin {
-  height: 20rem;
 }
 </style>

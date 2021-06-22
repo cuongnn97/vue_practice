@@ -49,7 +49,6 @@
             <a href="/homepage">戻る</a>
           </div>
         </div>
-        <div class="margin"></div>
       </div>
       <Footer />
     </div>
@@ -73,9 +72,10 @@ body {
   font-family: sans-serif;
 }
 .main-content {
+  position: relative;
+  height: 100vh;
   margin-top: 2rem;
   width: 100%;
-  height: fit-content;
 }
 .container {
   width: 60%;
@@ -138,8 +138,5 @@ a {
   font-weight: bold;
   font-size: 14px;
   margin-left: 0.5rem;
-}
-.margin {
-  margin-top: 20rem;
 }
 </style>

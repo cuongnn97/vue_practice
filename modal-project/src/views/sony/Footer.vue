@@ -1,13 +1,21 @@
 <template>
   <div class="footer">
-    <p>©2020 Sony Corporation</p>
+    <p>©{{currentYear}} Sony Corporation</p>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      currentYear: new Date().getFullYear() // 2021
+    }
+  }
+}
 </script>
 <style scoped>
 .footer {
+  bottom: 0;
+  left: 0;
   position: absolute;
   font-size: 14px;
   width: 100%;

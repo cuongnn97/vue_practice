@@ -16,7 +16,6 @@
           <CopyrightPublisher />
           <UntransferContract />
         </div>
-        <div class="margin"></div>
       </div>
       <Footer />
     </div>
@@ -45,11 +44,13 @@ export default {
 .main-content {
   margin-top: 2rem;
   width: 100%;
+  position: relative;
   height: fit-content;
 }
 .container {
   width: 60%;
   margin: 0 auto;
+  padding-bottom: 10rem;
 }
 .alert {
   width: 96.5%;
@@ -76,8 +77,5 @@ export default {
   font-size: 1vw;
   padding: 0.5rem 2rem 0.5rem 2rem;
   border-radius: 3px;
-}
-.margin {
-  height: 5rem;
 }
 </style>

@@ -49,7 +49,6 @@
               />
             </div>
           </form>
-          <div class="margin"></div>
         </div>
       </div>
       <Footer />
@@ -76,13 +75,15 @@ export default {
 }
 </script>
 <style scoped>
+
 body {
   font-family: sans-serif;
 }
 .main-content {
   margin-top: 2rem;
   width: 100%;
-  height: fit-content;
+  position: relative;
+  height: 100vh;
 }
 .container {
   width: 60%;
@@ -141,8 +142,5 @@ body {
   font-size: 14px;
   margin-left: 0.3rem;
   border: none;
-}
-.margin {
-  height: 20rem;
 }
 </style>

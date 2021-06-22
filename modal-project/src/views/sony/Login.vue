@@ -63,6 +63,7 @@ export default {
 .main-content {
   margin-top: 2rem;
   width: 100%;
+  position: relative;
   height: fit-content;
 }
 .container {
