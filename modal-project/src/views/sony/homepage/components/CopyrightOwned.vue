@@ -41,7 +41,7 @@
               </ul>
             </td>
             <td>
-              <a href="">著作権譲渡</a>
+              <a href="/copyright/edit">著作権譲渡</a>
               <a href="">編集</a>
             </td>
           </tr>
@@ -178,6 +178,7 @@ td a {
   border-radius: 5px;
   font-weight: bold;
   font-size: 14px;
-  width: 40%;
+  max-width: 436px;
+  width: 100%;
 }
 </style>

@@ -1,0 +1,343 @@
+<template>
+  <div>
+    <Header :rightMenu="true" />
+    <div class="main-content">
+      <h1>
+        著作権譲渡
+      </h1>
+      <div class="container">
+        <div class="content">
+          <div class="fields">
+            <label>作曲者名</label><br /><br />
+            <input
+              v-model="formElements.composerName"
+              id="input-text"
+              type="text"
+              disabled
+            />
+          </div>
+          <div class="fields">
+            <label>作品名フリガナ</label>
+            <input
+              v-model="formElements.workFurigana"
+              id="input-text"
+              type="text"
+              disabled
+            />
+          </div>
+          <div class="fields">
+            <label>作品名</label>
+            <input
+              v-model="formElements.title"
+              id="input-text"
+              type="text"
+              disabled
+            />
+          </div>
+          <div class="fields">
+            <label>ジャンル</label>
+            <input
+              v-model="formElements.genre"
+              id="input-text"
+              type="text"
+              disabled
+            />
+          </div>
+          <div class="fields">
+            <label>サブジャンル</label>
+            <input
+              v-model="formElements.subGenre"
+              id="input-text"
+              type="text"
+              disabled
+            />
+          </div>
+          <div class="fields">
+            <label>リリース日</label>
+            <input
+              v-model="formElements.releaseDate"
+              id="input-text"
+              type="text"
+              disabled
+            />
+          </div>
+          <div class="fields">
+            <label>販売開始日</label>
+            <input
+              v-model="formElements.startDate"
+              id="input-text"
+              type="text"
+              disabled
+            />
+          </div>
+          <div class="fields">
+            <label>譲受人ID</label>
+            <input
+              v-model="formElements.transfereeID"
+              id="input-text"
+              type="text"
+              disabled
+            />
+          </div>
+          <div class="fields" style="display:inline-block">
+            <div
+              v-for="copyrightCategory in copyrightCategories"
+              :key="copyrightCategory.id"
+              class="checkbox-field"
+            >
+              <input
+                :value="copyrightCategory.id"
+                @change="addCategory(copyrightCategory.id)"
+                class="checkbox-input"
+                type="checkbox"
+                disabled
+              />
+              <span>{{ copyrightCategory.name }}</span>
+            </div>
+          </div>
+          <div class="fields">
+            <label>契約期間</label>
+            <input
+              v-model="formElements.releaseDate"
+              id="input-range-date"
+              type="date"
+            />
+            <span>~</span>
+            <input
+              v-model="formElements.releaseDate"
+              id="input-range-date"
+              type="date"
+              style="float: right"
+            />
+          </div>
+          <div class="fields">
+            <label>契約自動更新</label><br /><br />
+            <div
+              v-for="contract in contracts"
+              :key="contract.id"
+              class="radio-field"
+            >
+              <input
+                v-model="formElements.composerName"
+                :value="contract.id"
+                type="radio"
+              />
+              <span>{{ contract.name }}</span>
+            </div>
+          </div>
+          <div class="action-form">
+            <a class="cancel-button" href="/homepage">キャンセル</a>
+            <a class="register-button" href="/creative_works">著作物登録</a>
+          </div>
+        </div>
+        <div class="image-content">
+          <label>アートワーク</label>
+          <img
+            src="https://bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh.s3.ap-northeast-1.amazonaws.com/creative_works/art_work_files/creative_work_id%3Ab537cace-f392-4e25-a4cf-ff49fa10c5d8_20210526041506.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU4VMWPH3LDYUANOG%2F20210716%2Fap-northeast-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210716T024421Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=b91a76f0de513ed5ebf3b85630fe0ba2b12eac7e38d9eeea48cf7b3819ec2319"
+          />
+        </div>
+      </div>
+      <Footer />
+    </div>
+  </div>
+</template>
+<script>
+import Header from '../Header'
+import Footer from '../Footer'
+export default {
+  data() {
+    return {
+      contracts: [
+        { id: 1, name: '有' },
+        { id: 2, name: '無' }
+      ],
+      pickedSubgenres: [],
+      copyrightCategories: [
+        { id: 1, name: '演奏権等' },
+        { id: 2, name: '映画への録音' },
+        { id: 3, name: '出版権等' },
+        { id: 4, name: '放送・有線放送' },
+        { id: 5, name: 'ゲームに供する目的で行う複製' },
+        { id: 6, name: '録音権等' },
+        { id: 7, name: '業務用通信カラオケ' },
+        { id: 8, name: 'ビデオグラムへの録音' },
+        { id: 9, name: '貸与権' },
+        { id: 10, name: 'インタラクティブ配信' },
+        { id: 11, name: '広告目的で行う複製' }
+      ],
+      formElements: {
+        composerName: 'cuong',
+        workFurigana: 'a',
+        title: 'a',
+        genre: 'Country',
+        subGenre: 'Americana',
+        releaseDate: '05/26/2021',
+        startDate: '05/26/2021',
+        transfereeID: ''
+      }
+    }
+  },
+  created() {},
+  methods: {},
+  components: {
+    Header,
+    Footer
+  }
+}
+</script>
+<style scoped>
+body {
+  font-family: sans-serif;
+}
+.content {
+  width: 50%;
+}
+.image-content {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+.image-content img {
+  width: 300px;
+  height: 168px;
+  object-fit: cover;
+}
+.image-content label {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 25px;
+}
+.main-content {
+  margin-top: 2rem;
+  width: 100%;
+  position: relative;
+  height: fit-content;
+}
+.container {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  padding-bottom: 10rem;
+  justify-content: space-between;
+}
+.main-content h1 {
+  margin: 0 auto;
+  width: 60%;
+  color: #00b5ad;
+  text-align: left;
+  border-bottom: 2px solid #00b5ad;
+  padding-bottom: 0.21428571rem;
+  margin-bottom: 25px;
+}
+.fields label {
+  margin-top: 1rem;
+  color: #000000de;
+  font-size: 13px;
+  font-family: sans-serif;
+  font-weight: bold;
+  width: 100%;
+  float: left;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+#input-text {
+  width: 100%;
+  padding: 10px 6px;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+}
+#input-range-date {
+  width: 45%;
+  padding: 10px 6px;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  float: left;
+}
+input[id*='input-text-coauthor'] {
+  width: 50%;
+  margin-bottom: 1rem;
+  padding: 10px 6px;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  float: left;
+}
+input[id*='input-button'] {
+  float: left;
+  padding: 11px 18px;
+  margin-left: 0.5rem;
+  background-color: #e0e1e2;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #00000099;
+  cursor: pointer;
+}
+input[id*='input-button-delete'] {
+  float: left;
+  padding: 11px 18px;
+  margin-left: 0.5rem;
+  background-color: #e0e1e2;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #00000099;
+  cursor: pointer;
+}
+.radio-field {
+  width: 40%;
+  float: left;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.fields select {
+  width: 101%;
+  padding: 10px 6px;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  background-color: white;
+}
+.checkbox-field {
+  width: 40%;
+  float: left;
+  text-align: left;
+  margin-bottom: 1rem;
+  background-color: white;
+}
+.action-form {
+  width: 100%;
+  display: inline-block;
+  text-align: left;
+}
+.cancel-button {
+  float: left;
+  padding: 8px 18px;
+  background-color: #e0e1e2;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #00000099;
+  cursor: pointer;
+  text-decoration: none;
+}
+.register-button {
+  float: left;
+  background-color: #2185d0;
+  text-decoration: none;
+  color: white;
+  padding: 8px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 0.3rem;
+}
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .main-content h1 {
+    width: 90%;
+  }
+}
+</style>

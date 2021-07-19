@@ -5,13 +5,13 @@
       <div class="container">
         <div class="content">
           <h1>
-            グループ登録
+            edit group
           </h1>
           <div class="fields">
             <label>グループ名フリガナ</label>
             <input
               name="group[name_kana]"
-              v-model="formElements.groupNameFurigana"
+              v-model="getGroup.name"
               id="input-text"
               type="text"
             />
@@ -20,7 +20,7 @@
             <label>グループ名</label>
             <input
               name="group[name]"
-              v-model="formElements.groupName"
+              v-model="getGroup.name"
               id="input-text"
               type="text"
             />
@@ -51,8 +51,19 @@ export default {
         groupName: '',
         groupNameFurigana: '',
         user_id: '40c95716-f9be-44db-98d2-bb7d67033716'
-      }
+      },
+      getGroup: []
     }
+  },
+  created() {
+    axios
+      .get(
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups/'+ this.$route.query.group_id
+      )
+      .then(response => {
+        this.getGroup = response.data
+        console.log(this.getGroup)
+      })
   },
   methods: {
     createGroups() {

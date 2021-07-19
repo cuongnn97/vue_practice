@@ -12,13 +12,13 @@
               サインイン
             </h1>
             <div class="fieldsRequired">
-              <label>Eメール</label
-              ><label style="color:red;margin-left:0.2rem">*</label>
+              <label>Eメール</label>
+              <label style="color:red;margin-left:0.2rem">*</label>
               <input name="email" type="text" required />
             </div>
             <div class="fieldsRequired">
-              <label>パスワード</label
-              ><label style="color:red;margin-left:0.2rem">*</label>
+              <label>パスワード</label>
+              <label style="color:red;margin-left:0.2rem">*</label>
               <input name="password" type="text" required />
             </div>
             <div class="checkbox">

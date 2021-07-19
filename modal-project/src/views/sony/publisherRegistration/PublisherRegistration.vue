@@ -143,4 +143,10 @@ body {
   margin-left: 0.3rem;
   border: none;
 }
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
 </style>

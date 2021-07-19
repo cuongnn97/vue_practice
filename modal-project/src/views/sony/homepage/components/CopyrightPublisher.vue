@@ -71,7 +71,8 @@ h2 {
   border-radius: 5px;
   font-weight: bold;
   font-size: 14px;
-  width: 40%;
+  max-width: 436px;
+  width: 100%;
 }
 h3 {
   text-align: left;
@@ -113,5 +114,13 @@ h3 {
   border: 1px solid #3dc3c3;
   border-radius: 3px;
   font-size: 14px;
+}
+@media screen and (max-width: 1280px) {
+  .publisher-list h3 {
+    font-size: 16px;
+  }
+  #edit-button {
+    font-size: 12px;
+  }
 }
 </style>

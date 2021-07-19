@@ -10,7 +10,10 @@ import JobDetails from '../views/jobs/JobDetails.vue'
 import Homepage from '../views/sony/homepage/Homepage.vue'
 import Login from '../views/sony/Login.vue'
 import CopyrightRegistration from '../views/sony/copyrightRegistration/CopyrightRegistration.vue'
+import CopyrightEdit from '../views/sony/copyrightRegistration/CopyrightEdit.vue'
+
 import GroupRegistration from '../views/sony/groupRegistration/GroupRegistration.vue'
+import GroupEdit from '../views/sony/groupRegistration/GroupEdit.vue'
 import PublisherRegistration from '../views/sony/publisherRegistration/PublisherRegistration.vue'
 import GroupInformation from '../views/sony/groupRegistration/GroupInformation.vue'
 
@@ -78,6 +81,17 @@ const routes = [
     name: 'GroupInformation',
     component: GroupInformation
   },
+  {
+    path: '/groups/edit',
+    name: 'GroupEdit',
+    component: GroupEdit
+  },
+  {
+    path: '/copyright/edit',
+    name: 'CopyrightEdit',
+    component: CopyrightEdit
+  },
+
   //END SONY
   //redirect
   {

@@ -26,21 +26,21 @@
               class="input-coauthor"
             >
               <input
-                id="input-text-coauthor"
+                :id="'input-text-coauthor-' + i"
                 v-model="coAuthor.name"
                 placeholder="作曲者ID"
                 type="text"
               />
               <input
-                id="input-button"
+                :id="'input-button-' + i"
                 type="button"
                 @click="addCoauthor"
                 value="ADD"
               />
               <input
-                id="input-button-delete"
+                :id="'input-button-delete-' + i"
                 type="button"
-                @click="deleteCoauthor"
+                @click="deleteCoauthor(i)"
                 value="DELETE"
                 v-show="coAuthor.displayFlag"
               />
@@ -221,8 +221,8 @@ export default {
     addCoauthor() {
       this.formElements.coAuthors.push({ name: '', displayFlag: true })
     },
-    deleteCoauthor() {
-      this.formElements.coAuthors.pop()
+    deleteCoauthor(i) {
+      this.formElements.coAuthors.splice(i, 1)
     },
     onChangeGenre(event) {
       this.pickedSubgenres = []
@@ -297,7 +297,7 @@ body {
   border: 1px solid #dedede;
   border-radius: 3px;
 }
-#input-text-coauthor {
+input[id*='input-text-coauthor'] {
   width: 50%;
   margin-bottom: 1rem;
   padding: 10px 6px;
@@ -305,7 +305,7 @@ body {
   border-radius: 3px;
   float: left;
 }
-#input-button {
+input[id*='input-button'] {
   float: left;
   padding: 11px 18px;
   margin-left: 0.5rem;
@@ -316,7 +316,7 @@ body {
   color: #00000099;
   cursor: pointer;
 }
-#input-button-delete {
+input[id*='input-button-delete'] {
   float: left;
   padding: 11px 18px;
   margin-left: 0.5rem;
@@ -374,5 +374,11 @@ body {
   font-weight: bold;
   font-size: 14px;
   margin-left: 0.3rem;
+}
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
 }
 </style>

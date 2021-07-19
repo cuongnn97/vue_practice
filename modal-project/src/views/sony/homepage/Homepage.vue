@@ -52,6 +52,20 @@ export default {
   margin: 0 auto;
   padding-bottom: 10rem;
 }
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .content h1 {
+    width: 100%;
+    color: #00b5ad;
+    text-align: left;
+    border-bottom: 2px solid #00b5ad;
+    padding-bottom: 0.21428571rem;
+    font-size: 25px;
+  }
+}
 .alert {
   width: 96.5%;
   color: #276f86;
@@ -74,7 +88,7 @@ export default {
   background-color: #2185d0;
   color: #ffffff;
   text-decoration: none;
-  font-size: 1vw;
+  font-size: 14px;
   padding: 0.5rem 2rem 0.5rem 2rem;
   border-radius: 3px;
 }

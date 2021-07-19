@@ -6,7 +6,7 @@
         <a class="primary-button" href="/groups/new">グループ登録</a>
       </h2>
     </div>
-    <div v-if="groups.length" class="group-list">
+    <div v-if="getGroups.length" class="group-list">
       <a
         class="download-button"
         target="_blank"
@@ -15,10 +15,12 @@
         href="/orchard_files/download"
         >チェックした曲のThe Orchard Bulk Uploadファイルをダウンロード</a
       >
-      <h3 v-for="(group, i) in groups" :key="i">
-        {{ group }}が所有する著作権一覧
-        <a id="edit-button" href="">編集</a>
-        <a id="group-registration-button" href="groups/group_id">グループ詳細</a>
+      <h3 v-for="(getGroup, i) in getGroups" :key="i">
+        {{ getGroup.name }}が所有する著作権一覧
+        <a id="edit-button" :href="'/groups/edit?group_id=' + getGroup.id">編集</a>
+        <a id="group-registration-button" href="groups/group_id"
+          >グループ詳細</a
+        >
       </h3>
     </div>
     <div v-else class="notification">
@@ -27,11 +29,23 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      groups: ['group1', 'group2']
+      groups: ['group1', 'group2'],
+      getGroups: []
     }
+  },
+  created() {
+    axios
+      .get(
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/groups'
+      )
+      .then(response => {
+        this.getGroups = response.data
+        console.log(this.getGroups)
+      })
   }
 }
 </script>
@@ -71,7 +85,8 @@ h2 {
   border-radius: 5px;
   font-weight: bold;
   font-size: 14px;
-  width: 40%;
+  max-width: 436px;
+  width: 100%;
 }
 h3 {
   text-align: left;
@@ -113,5 +128,13 @@ h3 {
   border: 1px solid #3dc3c3;
   border-radius: 3px;
   font-size: 14px;
+}
+@media screen and (max-width: 1280px) {
+  .group-list h3 {
+    font-size: 16px;
+  }
+  #edit-button {
+    font-size: 12px;
+  }
 }
 </style>
