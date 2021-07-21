@@ -11,7 +11,7 @@
             <label>グループ名フリガナ</label>
             <input
               name="group[name_kana]"
-              v-model="formElements.groupNameFurigana"
+              v-model="formElements.group_name_kana"
               id="input-text"
               type="text"
             />
@@ -20,7 +20,7 @@
             <label>グループ名</label>
             <input
               name="group[name]"
-              v-model="formElements.groupName"
+              v-model="formElements.group_name"
               id="input-text"
               type="text"
             />
@@ -48,9 +48,9 @@ export default {
   data() {
     return {
       formElements: {
-        groupName: '',
-        groupNameFurigana: '',
-        user_id: '40c95716-f9be-44db-98d2-bb7d67033716'
+        group_name: '',
+        group_name_kana: '',
+        user_id: 'user_id:40c95716-f9be-44db-98d2-bb7d67033716'
       }
     }
   },
@@ -70,7 +70,7 @@ export default {
       //     window.location.href = '/'
       //   })
       fetch(
-        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/groups',
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups',
         {
           method: 'POST',
           body: JSON.stringify(this.formElements)

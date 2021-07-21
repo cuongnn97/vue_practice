@@ -20,7 +20,7 @@
             <label>グループ名</label>
             <input
               name="group[name]"
-              v-model="getGroup.name"
+              v-model="getGroup.name_kana"
               id="input-text"
               type="text"
             />
@@ -31,7 +31,7 @@
               type="submit"
               value="グループ登録"
               class="ui primary button"
-              @click="createGroups"
+              @click="editGroup"
             />
           </div>
         </div>
@@ -48,9 +48,8 @@ export default {
   data() {
     return {
       formElements: {
-        groupName: '',
-        groupNameFurigana: '',
-        user_id: '40c95716-f9be-44db-98d2-bb7d67033716'
+        group_name: '',
+        group_name_kana: ''
       },
       getGroup: []
     }
@@ -66,7 +65,10 @@ export default {
       })
   },
   methods: {
-    createGroups() {
+    editGroup() {
+      console.log(JSON.stringify(this.getGroup))
+      this.formElements.group_name = this.getGroup.name
+      this.formElements.group_name_kana = this.getGroup.name_kana
       // axios
       //   .post(
       //     'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/groups',
@@ -81,9 +83,9 @@ export default {
       //     window.location.href = '/'
       //   })
       fetch(
-        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/groups',
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups/' + this.$route.query.group_id,
         {
-          method: 'POST',
+          method: 'PATCH',
           body: JSON.stringify(this.formElements)
         }
       )
