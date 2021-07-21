@@ -6,7 +6,7 @@
         <a class="primary-button" href="/publishers/new">出版社登録</a>
       </h2>
     </div>
-    <div v-if="publishers.length" class="publisher-list">
+    <div v-if="getPublishers.length" class="publisher-list">
       <a
         class="download-button"
         target="_blank"
@@ -15,9 +15,9 @@
         href="/orchard_files/download"
         >チェックした曲のThe Orchard Bulk Uploadファイルをダウンロード</a
       >
-      <h3 v-for="(publisher, i) in publishers" :key="i">
-        {{ publisher }}が所有する著作権一覧
-        <a id="edit-button" href="">編集</a>
+      <h3 v-for="(publisher, i) in getPublishers" :key="i">
+        {{ publisher.name }}が所有する著作権一覧
+        <a id="edit-button" :href="'/publishers/edit?publisher_id=' + publisher.id">編集</a>
         <a id="publisher-registration-button" href="">出版社詳細</a>
       </h3>
     </div>
@@ -27,11 +27,23 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      publishers: ['publisher1', 'publisher2']
+      publishers: ['publisher1', 'publisher2'],
+      getPublishers: []
     }
+  },
+  created() {
+    axios
+      .get(
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/publishers'
+      )
+      .then(response => {
+        this.getPublishers = response.data
+        console.log(this.getPublishers)
+      })
   }
 }
 </script>

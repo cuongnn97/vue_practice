@@ -4,12 +4,6 @@
     <div class="main-content">
       <div class="container">
         <div class="content">
-          <form
-            class="ui form"
-            action="/groups"
-            accept-charset="UTF-8"
-            method="post"
-          >
             <h1>
               出版社登録
             </h1>
@@ -17,7 +11,7 @@
               <label>出版社名フリガナ</label>
               <input
                 name="publisher[name_kana]"
-                v-model="formElements.publisherNameFurigana"
+                v-model="formElements.publisher_name_kana"
                 id="input-text"
                 type="text"
               />
@@ -26,7 +20,7 @@
               <label>出版社名</label>
               <input
                 name="publisher[name]"
-                v-model="formElements.publisherName"
+                v-model="formElements.publisher_name"
                 id="input-text"
                 type="text"
               />
@@ -35,7 +29,7 @@
               <label>JASRAC会員 ID</label>
               <input
                 name="publisher[jasrac_member_id]"
-                v-model="formElements.jasracMemberId"
+                v-model="formElements.jasrac_member_id"
                 id="input-text"
                 type="text"
               />
@@ -46,9 +40,9 @@
                 type="submit"
                 value="出版社登録"
                 class="ui primary button"
+                @click="createPublisher"
               />
             </div>
-          </form>
         </div>
       </div>
       <Footer />
@@ -58,14 +52,29 @@
 <script>
 import Header from '../Header'
 import Footer from '../Footer'
+import axios from 'axios'
 export default {
   data() {
     return {
       formElements: {
-        publisherNameFurigana: '',
-        publisherName: '',
-        jasracMemberId: ''
+        publisher_name_kana: '',
+        publisher_name: '',
+        jasrac_member_id: '',
+        user_id: 'user_id:40c95716-f9be-44db-98d2-bb7d67033716'
       }
+    }
+  },
+  methods: {
+    createPublisher() {
+      axios
+        .post(
+          'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/publishers',
+          JSON.stringify(this.formElements)
+        )
+        .then(response => {
+          console.log(response)
+          window.location.href = '/'
+        })
     }
   },
   components: {

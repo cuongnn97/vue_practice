@@ -56,29 +56,14 @@ export default {
   },
   methods: {
     createGroups() {
-      // axios
-      //   .post(
-      //     'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/groups',
-      //     {
-      //       group_name: this.formElements.groupName,
-      //       group_name_kana: this.formElements.groupNameFurigana,
-      //       user_id: '40c95716-f9be-44db-98d2-bb7d67033716'
-      //     }
-      //   )
-      //   .then(response => {
-      //     console.log(response)
-      //     window.location.href = '/'
-      //   })
-      fetch(
-        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups',
-        {
-          method: 'POST',
-          body: JSON.stringify(this.formElements)
-        }
-      )
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data)
+      axios
+        .post(
+          'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups',
+          JSON.stringify(this.formElements)
+        )
+        .then(response => {
+          console.log(response)
+          window.location.href = '/'
         })
     }
   },

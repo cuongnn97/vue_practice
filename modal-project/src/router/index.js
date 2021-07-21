@@ -15,6 +15,7 @@ import CopyrightEdit from '../views/sony/copyrightRegistration/CopyrightEdit.vue
 import GroupRegistration from '../views/sony/groupRegistration/GroupRegistration.vue'
 import GroupEdit from '../views/sony/groupRegistration/GroupEdit.vue'
 import PublisherRegistration from '../views/sony/publisherRegistration/PublisherRegistration.vue'
+import PublisherEdit from '../views/sony/publisherRegistration/PublisherEdit.vue'
 import GroupInformation from '../views/sony/groupRegistration/GroupInformation.vue'
 
 const routes = [
@@ -75,6 +76,11 @@ const routes = [
     path: '/publishers/new',
     name: 'PublisherRegistration',
     component: PublisherRegistration
+  },
+  {
+    path: '/publishers/edit',
+    name: 'PublisherEdit',
+    component: PublisherEdit
   },
   {
     path: '/groups/group_id',

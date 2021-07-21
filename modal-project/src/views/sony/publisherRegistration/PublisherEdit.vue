@@ -8,19 +8,28 @@
             編集
           </h1>
           <div class="fields">
-            <label>グループ名フリガナ</label>
+            <label>出版社名フリガナ</label>
             <input
-              name="group[name_kana]"
-              v-model="getGroup.name"
+              name="publisher[name_kana]"
+              v-model="getPublisher.name"
               id="input-text"
               type="text"
             />
           </div>
           <div class="fields">
-            <label>グループ名</label>
+            <label>出版社名</label>
             <input
-              name="group[name]"
-              v-model="getGroup.name_kana"
+              name="publisher[name]"
+              v-model="getPublisher.name_kana"
+              id="input-text"
+              type="text"
+            />
+          </div>
+          <div class="fields">
+            <label>JASRAC会員 ID</label>
+            <input
+              name="publisher[jasrac_member_id]"
+              v-model="getPublisher.jasrac_member_id"
               id="input-text"
               type="text"
             />
@@ -48,31 +57,33 @@ export default {
   data() {
     return {
       formElements: {
-        group_name: '',
-        group_name_kana: ''
+        publisher_name: '',
+        publisher_name_kana: '',
+        jasrac_member_id: ''
       },
-      getGroup: []
+      getPublisher: []
     }
   },
   created() {
     axios
       .get(
-        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups/' +
-          this.$route.query.group_id
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/publishers/' +
+          this.$route.query.publisher_id
       )
       .then(response => {
-        this.getGroup = response.data
-        console.log(this.getGroup)
+        this.getPublisher = response.data
+        console.log(this.getPublisher)
       })
   },
   methods: {
     editGroup() {
-      this.formElements.group_name = this.getGroup.name
-      this.formElements.group_name_kana = this.getGroup.name_kana
+      this.formElements.publisher_name = this.getPublisher.name
+      this.formElements.publisher_name_kana = this.getPublisher.name_kana
+      this.formElements.jasrac_member_id = this.getPublisher.jasrac_member_id
       axios
         .patch(
-          'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups/' +
-            this.$route.query.group_id,
+          'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/publishers/' +
+            this.$route.query.publisher_id,
           JSON.stringify(this.formElements)
         )
         .then(response => {
