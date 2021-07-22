@@ -18,7 +18,7 @@
       <h3 v-for="(getGroup, i) in getGroups" :key="i">
         {{ getGroup.name }}が所有する著作権一覧
         <a id="edit-button" :href="'/groups/edit?group_id=' + getGroup.id">編集</a>
-        <a id="group-registration-button" href="groups/group_id"
+        <a id="group-registration-button" :href="'groups?group_id=' + getGroup.id"
           >グループ詳細</a
         >
       </h3>

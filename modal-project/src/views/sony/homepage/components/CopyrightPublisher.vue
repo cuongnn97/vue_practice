@@ -18,7 +18,7 @@
       <h3 v-for="(publisher, i) in getPublishers" :key="i">
         {{ publisher.name }}が所有する著作権一覧
         <a id="edit-button" :href="'/publishers/edit?publisher_id=' + publisher.id">編集</a>
-        <a id="publisher-registration-button" href="">出版社詳細</a>
+        <a id="publisher-registration-button" :href="'publishers?publisher_id='  + publisher.id">出版社詳細</a>
       </h3>
     </div>
     <div v-else class="notification">

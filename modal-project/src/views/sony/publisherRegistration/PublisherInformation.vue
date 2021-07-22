@@ -10,16 +10,20 @@
           <table>
             <tbody>
               <tr>
-                <td>グループ名フリガナ</td>
-                <td>{{groupFromDb.name_kana}}</td>
+                <td>出版社名フリガナ</td>
+                <td>{{ publisherFromDb.name_kana }}</td>
               </tr>
               <tr>
-                <td>グループ名</td>
-                <td>{{groupFromDb.name}}</td>
+                <td>出版社名</td>
+                <td>{{ publisherFromDb.name }}</td>
               </tr>
               <tr>
                 <td>ID</td>
-                <td>{{$route.query.group_id}}</td>
+                <td>{{ $route.query.publisher_id }}</td>
+              </tr>
+              <tr>
+                <td>JASRAC会員 ID</td>
+                <td>{{ publisherFromDb.jasrac_member_id }}</td>
               </tr>
               <tr>
                 <td>グループメンバー</td>
@@ -29,18 +33,6 @@
                       cuong
                     </li>
                   </ul>
-                  <input
-                    type="text"
-                    name="group[user_id]"
-                    id="group_user_id"
-                    placeholder="グループメンバーID"
-                  />
-                  <input
-                    type="submit"
-                    name="commit"
-                    value="追加"
-                    class="submit-button"
-                  />
                 </td>
               </tr>
             </tbody>
@@ -61,22 +53,18 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      formElements: {
-        group_name: '',
-        group_name_kana: ''
-      },
-      groupFromDb: []
+      publisherFromDb: []
     }
   },
   created() {
     axios
       .get(
-        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups/' +
-          this.$route.query.group_id
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/publishers/' +
+          this.$route.query.publisher_id
       )
       .then(response => {
-        this.groupFromDb = response.data
-        console.log(this.groupFromDb)
+        this.publisherFromDb = response.data
+        console.log(this.publisherFromDb)
       })
   },
   components: {

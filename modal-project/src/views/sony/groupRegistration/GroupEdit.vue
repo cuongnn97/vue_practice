@@ -11,7 +11,7 @@
             <label>グループ名フリガナ</label>
             <input
               name="group[name_kana]"
-              v-model="getGroup.name"
+              v-model="groupFromDb.name"
               id="input-text"
               type="text"
             />
@@ -20,7 +20,7 @@
             <label>グループ名</label>
             <input
               name="group[name]"
-              v-model="getGroup.name_kana"
+              v-model="groupFromDb.name_kana"
               id="input-text"
               type="text"
             />
@@ -51,7 +51,7 @@ export default {
         group_name: '',
         group_name_kana: ''
       },
-      getGroup: []
+      groupFromDb: []
     }
   },
   created() {
@@ -61,14 +61,14 @@ export default {
           this.$route.query.group_id
       )
       .then(response => {
-        this.getGroup = response.data
-        console.log(this.getGroup)
+        this.groupFromDb = response.data
+        console.log(this.groupFromDb)
       })
   },
   methods: {
     editGroup() {
-      this.formElements.group_name = this.getGroup.name
-      this.formElements.group_name_kana = this.getGroup.name_kana
+      this.formElements.group_name = this.groupFromDb.name
+      this.formElements.group_name_kana = this.groupFromDb.name_kana
       axios
         .patch(
           'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/groups/' +

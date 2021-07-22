@@ -11,7 +11,7 @@
             <label>出版社名フリガナ</label>
             <input
               name="publisher[name_kana]"
-              v-model="getPublisher.name"
+              v-model="publisherFromDb.name"
               id="input-text"
               type="text"
             />
@@ -20,7 +20,7 @@
             <label>出版社名</label>
             <input
               name="publisher[name]"
-              v-model="getPublisher.name_kana"
+              v-model="publisherFromDb.name_kana"
               id="input-text"
               type="text"
             />
@@ -29,7 +29,7 @@
             <label>JASRAC会員 ID</label>
             <input
               name="publisher[jasrac_member_id]"
-              v-model="getPublisher.jasrac_member_id"
+              v-model="publisherFromDb.jasrac_member_id"
               id="input-text"
               type="text"
             />
@@ -61,8 +61,8 @@ export default {
         publisher_name_kana: '',
         jasrac_member_id: ''
       },
-      getPublisher: []
-    }
+      publisherFromDb: []
+    } 
   },
   created() {
     axios
@@ -71,15 +71,15 @@ export default {
           this.$route.query.publisher_id
       )
       .then(response => {
-        this.getPublisher = response.data
-        console.log(this.getPublisher)
+        this.publisherFromDb = response.data
+        console.log(this.publisherFromDb)
       })
   },
   methods: {
     editGroup() {
-      this.formElements.publisher_name = this.getPublisher.name
-      this.formElements.publisher_name_kana = this.getPublisher.name_kana
-      this.formElements.jasrac_member_id = this.getPublisher.jasrac_member_id
+      this.formElements.publisher_name = this.publisherFromDb.name
+      this.formElements.publisher_name_kana = this.publisherFromDb.name_kana
+      this.formElements.jasrac_member_id = this.publisherFromDb.jasrac_member_id
       axios
         .patch(
           'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/publishers/' +
