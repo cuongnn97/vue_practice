@@ -27,13 +27,13 @@
                 v-model="ownedCopyrightIds"
               />
             </td>
-            <td>{{ ownedCopyright.creativeWorkName }}</td>
+            <td>{{ ownedCopyright.name }}</td>
             <td>
               <span style="font-weight:bold">Original</span>
               <ul>
                 <li
                   v-for="(copyrightCategory,
-                  i) in ownedCopyright.copyrightCategories"
+                  i) in ownedCopyright.copyright_categories"
                   :key="i"
                 >
                   {{ copyrightCategory }}
@@ -42,7 +42,12 @@
             </td>
             <td style="width:130px">
               <a href="/copyright/edit">著作権譲渡</a>
-              <a href="">編集</a>
+              <a
+                :href="
+                  '/creative_works/edit?creative_work_id=' + ownedCopyright.id
+                "
+                >編集</a
+              >
             </td>
           </tr>
         </tbody>
@@ -70,11 +75,7 @@ export default {
       allSelected: false,
       ownedCopyrightIds: [],
       ownedCopyrights: [],
-      creativeWorkIdsObject: {
-        creativeWork: '',
-        copyrightCategories: [],
-        creativeWorkName: ''
-      }
+      creativeWorkIds: []
     }
   },
   created() {
@@ -84,36 +85,19 @@ export default {
       )
       .then(response => {
         let copyrightsData = response.data
-        for (let i = 0; i < copyrightsData.length; i++) {
-          if (i == 0) {
-            this.creativeWorkIdsObject.creativeWork =
-              copyrightsData[i].creative_work_id
-            this.creativeWorkIdsObject.copyrightCategories.push(
-              copyrightsData[i].copyright_category
-            )
-          } else {
-            if (
-              this.creativeWorkIdsObject.creativeWork !==
-              copyrightsData[i].creative_work_id
-            ) {
-              this.ownedCopyrights.push(this.creativeWorkIdsObject)
-              this.creativeWorkIdsObject = null
-            } else {
-              this.creativeWorkIdsObject.copyrightCategories.push(
-                copyrightsData[i].copyright_category
-              )
-            }
+        for (const copyright of copyrightsData) {
+          if (this.creativeWorkIds.indexOf(copyright.creative_work_id) === -1) {
+            this.creativeWorkIds.push(copyright.creative_work_id)
           }
         }
-        this.ownedCopyrights.push(this.creativeWorkIdsObject)
-        for (const ownedCopyright of this.ownedCopyrights) {
+        for (const creativeWork of this.creativeWorkIds) {
           axios
             .get(
               'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works/' +
-                ownedCopyright.creativeWork
+                creativeWork
             )
             .then(response => {
-              ownedCopyright.creativeWorkName = response.data.name
+              this.ownedCopyrights.push(response.data)
             })
         }
       })
@@ -146,7 +130,7 @@ h2 {
   margin: 0;
   width: 100%;
   margin-bottom: 1rem;
-  font-size: 24px ;
+  font-size: 24px;
 }
 .copyright-list {
   width: 100%;

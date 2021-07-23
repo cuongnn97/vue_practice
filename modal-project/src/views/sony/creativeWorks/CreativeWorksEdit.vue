@@ -9,54 +9,35 @@
           </h1>
           <div class="fields">
             <label>作曲者名</label><br /><br />
-            <div v-for="user in users" :key="user.id" class="radio-field">
-              <input
-                v-model="formElements.composerName"
-                :value="user.id"
-                type="radio"
-              />
-              <span>{{ user.name }}</span>
-            </div>
-          </div>
-          <div class="fields">
-            <label>共作者追加</label>
             <div
-              v-for="(coAuthor, i) in formElements.coAuthors"
-              :key="i"
-              class="input-coauthor"
+              v-for="user in creativeWorkFromDb.creator_ids"
+              :key="user"
+              class="radio-field"
             >
               <input
-                :id="'input-text-coauthor-' + i"
-                v-model="coAuthor.name"
-                placeholder="作曲者ID"
-                type="text"
+                v-model="formElements.composerName"
+                :value="user"
+                type="radio"
+                disabled
               />
-              <input
-                :id="'input-button-' + i"
-                type="button"
-                @click="addCoauthor"
-                value="ADD"
-              />
-              <input
-                :id="'input-button-delete-' + i"
-                type="button"
-                @click="deleteCoauthor(i)"
-                value="DELETE"
-                v-show="coAuthor.displayFlag"
-              />
+              <span>{{ user }}</span>
             </div>
           </div>
           <div class="fields">
             <label>作品名フリガナ</label>
             <input
-              v-model="formElements.workFurigana"
+              v-model="creativeWorkFromDb.name_kana"
               id="input-text"
               type="text"
             />
           </div>
           <div class="fields">
             <label>作品名</label>
-            <input v-model="formElements.title" id="input-text" type="text" />
+            <input
+              v-model="creativeWorkFromDb.name"
+              id="input-text"
+              type="text"
+            />
           </div>
           <div class="fields">
             <label>ジャンル</label>
@@ -64,15 +45,12 @@
               name="genres"
               id="genres"
               @change="onChangeGenre($event)"
-              v-model="formElements.genre"
+              v-model="creativeWorkFromDb.genre"
             >
-              <option value="0" selected></option>
-              <option
-                v-for="genre in genres"
-                :key="genre.id"
-                :value="genre.id"
-                >{{ genre.name }}</option
-              >
+              <option value="0"></option>
+              <option :value="creativeWorkFromDb.genre" selected>{{
+                creativeWorkFromDb.genre
+              }}</option>
             </select>
           </div>
           <div class="fields">
@@ -80,21 +58,18 @@
             <select
               name="subGenres"
               id="subGenres"
-              v-model="formElements.subGenre"
+              v-model="creativeWorkFromDb.sub_genre"
             >
-              <option value="0" selected></option>
-              <option
-                v-for="pickedSubgenre in pickedSubgenres"
-                :key="pickedSubgenre.id"
-                :value="pickedSubgenre.id"
-                >{{ pickedSubgenre.name }}</option
-              >
+              <option value="0"></option>
+              <option :value="creativeWorkFromDb.sub_genre" selected>{{
+                creativeWorkFromDb.sub_genre
+              }}</option>
             </select>
           </div>
           <div class="fields">
             <label>リリース日</label>
             <input
-              v-model="formElements.releaseDate"
+              v-model="creativeWorkFromDb.release_date"
               id="input-text"
               type="date"
             />
@@ -102,7 +77,7 @@
           <div class="fields">
             <label>販売開始日</label>
             <input
-              v-model="formElements.startDate"
+              v-model="creativeWorkFromDb.sale_start_date"
               id="input-text"
               type="date"
             />
@@ -135,13 +110,14 @@
                 class="checkbox-input"
                 type="checkbox"
                 checked
+                disabled
               />
               <span>{{ copyrightCategory.name }}</span>
             </div>
           </div>
           <div class="action-form">
             <a class="cancel-button" href="/homepage">キャンセル</a>
-            <a class="register-button" href="/creative_works">著作物登録</a>
+            <a class="register-button" @click="editCreativeWork">編集</a>
           </div>
         </div>
       </div>
@@ -152,51 +128,10 @@
 <script>
 import Header from '../Header'
 import Footer from '../Footer'
+import axios from 'axios'
 export default {
   data() {
     return {
-      users: [
-        { id: 1, name: 'cuong' },
-        { id: 2, name: 'furigana1' }
-      ],
-      genres: [
-        { id: 1, name: 'blue' },
-        { id: 2, name: 'white' },
-        { id: 3, name: 'green' },
-        { id: 4, name: 'red' }
-      ],
-      subGenres: [
-        { id: 1, genreId: 1, name: 'blue1' },
-        { id: 2, genreId: 1, name: 'blue2' },
-        { id: 3, genreId: 1, name: 'blue3' },
-        { id: 4, genreId: 1, name: 'blue4' },
-        { id: 5, genreId: 2, name: 'white1' },
-        { id: 6, genreId: 2, name: 'white2' },
-        { id: 7, genreId: 2, name: 'white3' },
-        { id: 8, genreId: 2, name: 'white4' },
-        { id: 9, genreId: 3, name: 'green1' },
-        { id: 10, genreId: 3, name: 'green2' },
-        { id: 11, genreId: 3, name: 'green3' },
-        { id: 12, genreId: 3, name: 'green4' },
-        { id: 13, genreId: 4, name: 'red1' },
-        { id: 14, genreId: 4, name: 'red2' },
-        { id: 15, genreId: 4, name: 'red3' },
-        { id: 16, genreId: 4, name: 'red4' }
-      ],
-      pickedSubgenres: [],
-      copyrightCategories: [
-        { id: 1, name: '演奏権等' },
-        { id: 2, name: '映画への録音' },
-        { id: 3, name: '出版権等' },
-        { id: 4, name: '放送・有線放送' },
-        { id: 5, name: 'ゲームに供する目的で行う複製' },
-        { id: 6, name: '録音権等' },
-        { id: 7, name: '業務用通信カラオケ' },
-        { id: 8, name: 'ビデオグラムへの録音' },
-        { id: 9, name: '貸与権' },
-        { id: 10, name: 'インタラクティブ配信' },
-        { id: 11, name: '広告目的で行う複製' }
-      ],
       formElements: {
         composerName: '',
         coAuthors: [{ name: '', displayFlag: false }],
@@ -209,46 +144,40 @@ export default {
         artworkFile: null,
         copyrightFile: null,
         copyrightCategories: []
-      }
-    }
-  },
-  created() {
-    for (let i = 0; i < this.copyrightCategories.length; i++) {
-      this.formElements.copyrightCategories.push(this.copyrightCategories[i].id)
+      },
+      creativeWorkFromDb: [],
+      copyrightCategories: [
+        { id: 1, name: '演奏権等' },
+        { id: 2, name: '映画への録音' },
+        { id: 3, name: '出版権等' },
+        { id: 4, name: '放送・有線放送' },
+        { id: 5, name: 'ゲームに供する目的で行う複製' },
+        { id: 6, name: '録音権等' },
+        { id: 7, name: '業務用通信カラオケ' },
+        { id: 8, name: 'ビデオグラムへの録音' },
+        { id: 9, name: '貸与権' },
+        { id: 10, name: 'インタラクティブ配信' },
+        { id: 11, name: '広告目的で行う複製' }
+      ]
     }
   },
   methods: {
-    addCoauthor() {
-      this.formElements.coAuthors.push({ name: '', displayFlag: true })
-    },
-    deleteCoauthor(i) {
-      this.formElements.coAuthors.splice(i, 1)
-    },
-    onChangeGenre(event) {
-      this.pickedSubgenres = []
-      for (let i = 0; i < this.subGenres.length; i++) {
-        if (this.subGenres[i].genreId.toString() === event.target.value) {
-          this.pickedSubgenres.push(this.subGenres[i])
-        }
-      }
-    },
-    onFileChange(event, fileName) {
-      var files = event.target.files || event.dataTransfer.files
-      if (!files.length) return
-      if (fileName === 'artworkFile') {
-        this.formElements.artworkFile = files[0]
-      } else if (fileName === 'copyrightFile') {
-        this.formElements.copyrightFile = files[0]
-      }
-    },
-    addCategory(id) {
-      const index = this.formElements.copyrightCategories.indexOf(id)
-      if (index > -1) {
-        this.formElements.copyrightCategories.splice(index, 1)
-      } else {
-        this.formElements.copyrightCategories.push(id)
-      }
-    }
+    editCreativeWork() {},
+    changeDateFormat() {} 
+  },
+  created() {
+    axios
+      .get(
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works/' +
+          this.$route.query.creative_work_id
+      )
+      .then(response => {
+        this.creativeWorkFromDb = response.data
+        this.creativeWorkFromDb.release_date = this.creativeWorkFromDb.release_date.substring(0, 4) + '-' + this.creativeWorkFromDb.release_date.substring(4, this.creativeWorkFromDb.release_date.length);
+        this.creativeWorkFromDb.release_date = this.creativeWorkFromDb.release_date.substring(0, 7) + '-' + this.creativeWorkFromDb.release_date.substring(7, this.creativeWorkFromDb.release_date.length); 
+        this.creativeWorkFromDb.sale_start_date = this.creativeWorkFromDb.sale_start_date.substring(0, 4) + '-' + this.creativeWorkFromDb.sale_start_date.substring(4, this.creativeWorkFromDb.sale_start_date.length);
+        this.creativeWorkFromDb.sale_start_date = this.creativeWorkFromDb.sale_start_date.substring(0, 7) + '-' + this.creativeWorkFromDb.sale_start_date.substring(7, this.creativeWorkFromDb.sale_start_date.length); 
+      })
   },
   components: {
     Header,

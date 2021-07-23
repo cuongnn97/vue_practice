@@ -267,7 +267,7 @@ body {
   height: fit-content;
 }
 .container {
-  width: 60%;
+  width: 1127px;
   margin: 0 auto;
   padding-bottom: 10rem;
 }
@@ -375,10 +375,14 @@ input[id*='input-button-delete'] {
   font-size: 14px;
   margin-left: 0.3rem;
 }
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1199px) {
   .container {
-    width: 100%;
-    margin: 0 auto;
+    width: 933px;
+  }
+}
+@media screen and (max-width: 993px) {
+  .container {
+    width: 723px;
   }
 }
 </style>

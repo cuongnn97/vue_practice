@@ -11,6 +11,7 @@ import Homepage from '../views/sony/homepage/Homepage.vue'
 import Login from '../views/sony/Login.vue'
 import CopyrightRegistration from '../views/sony/copyrightRegistration/CopyrightRegistration.vue'
 import CopyrightEdit from '../views/sony/copyrightRegistration/CopyrightEdit.vue'
+import CreativeWorksEdit from '../views/sony/creativeWorks/CreativeWorksEdit.vue'
 
 import GroupRegistration from '../views/sony/groupRegistration/GroupRegistration.vue'
 import GroupEdit from '../views/sony/groupRegistration/GroupEdit.vue'
@@ -102,6 +103,11 @@ const routes = [
     path: '/copyright/edit',
     name: 'CopyrightEdit',
     component: CopyrightEdit
+  },
+  {
+    path: '/creative_works/edit',
+    name: 'CreativeWorksEdit',
+    component: CreativeWorksEdit
   },
 
   //END SONY

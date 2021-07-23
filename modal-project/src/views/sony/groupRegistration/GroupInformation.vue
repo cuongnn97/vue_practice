@@ -95,7 +95,7 @@ body {
   width: 100%;
 }
 .container {
-  width: 60%;
+  width: 1127px;
   margin: 0 auto;
 }
 .content h1 {
@@ -156,10 +156,14 @@ a {
   font-size: 14px;
   margin-left: 0.5rem;
 }
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1199px) {
   .container {
-    width: 100%;
-    margin: 0 auto;
+    width: 933px;
+  }
+}
+@media screen and (max-width: 993px) {
+  .container {
+    width: 723px;
   }
 }
 </style>
