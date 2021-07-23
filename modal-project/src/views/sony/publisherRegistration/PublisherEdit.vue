@@ -72,7 +72,6 @@ export default {
       )
       .then(response => {
         this.publisherFromDb = response.data
-        console.log(this.publisherFromDb)
       })
   },
   methods: {
@@ -87,7 +86,6 @@ export default {
           JSON.stringify(this.formElements)
         )
         .then(response => {
-          console.log(response)
           window.location.href = '/'
         })
     }

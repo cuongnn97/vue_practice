@@ -72,7 +72,6 @@ export default {
           JSON.stringify(this.formElements)
         )
         .then(response => {
-          console.log(response)
           window.location.href = '/'
         })
     }

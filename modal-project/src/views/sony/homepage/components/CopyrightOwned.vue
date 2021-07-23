@@ -27,7 +27,7 @@
                 v-model="ownedCopyrightIds"
               />
             </td>
-            <td>{{ ownedCopyright.creativeWork }}</td>
+            <td>{{ ownedCopyright.creativeWorkName }}</td>
             <td>
               <span style="font-weight:bold">Original</span>
               <ul>
@@ -40,7 +40,7 @@
                 </li>
               </ul>
             </td>
-            <td>
+            <td style="width:130px">
               <a href="/copyright/edit">著作権譲渡</a>
               <a href="">編集</a>
             </td>
@@ -62,35 +62,61 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
       displayFlag: true,
-      ownedCopyrights: [
-        {
-          creativeWork: 'Job 1',
-          copyrightCategories: [
-            'RIGHTS_OF_RECORDING_TO_VIDEOGRAMS_ETC',
-            'RIGHTS_OF_INTERACTIVE_DISTRIBUTION',
-            'RIGHTS_OF_REPRODUCTION_FOR_ADVERTISEMENTS',
-            'RIGHTS_OF_COMMERCIAL_ON_DEMAND_KARAOKE'
-          ],
-          id: 1
-        },
-        {
-          creativeWork: 'Job 2',
-          copyrightCategories: [
-            'RIGHTS_OF_RECORDING_TO_VIDEOGRAMS_ETC',
-            'RIGHTS_OF_INTERACTIVE_DISTRIBUTION',
-            'RIGHTS_OF_REPRODUCTION_FOR_ADVERTISEMENTS',
-            'RIGHTS_OF_COMMERCIAL_ON_DEMAND_KARAOKE'
-          ],
-          id: 2
-        }
-      ],
       allSelected: false,
-      ownedCopyrightIds: []
+      ownedCopyrightIds: [],
+      ownedCopyrights: [],
+      creativeWorkIdsObject: {
+        creativeWork: '',
+        copyrightCategories: [],
+        creativeWorkName: ''
+      }
     }
+  },
+  created() {
+    axios
+      .get(
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/copyrights'
+      )
+      .then(response => {
+        let copyrightsData = response.data
+        for (let i = 0; i < copyrightsData.length; i++) {
+          if (i == 0) {
+            this.creativeWorkIdsObject.creativeWork =
+              copyrightsData[i].creative_work_id
+            this.creativeWorkIdsObject.copyrightCategories.push(
+              copyrightsData[i].copyright_category
+            )
+          } else {
+            if (
+              this.creativeWorkIdsObject.creativeWork !==
+              copyrightsData[i].creative_work_id
+            ) {
+              this.ownedCopyrights.push(this.creativeWorkIdsObject)
+              this.creativeWorkIdsObject = null
+            } else {
+              this.creativeWorkIdsObject.copyrightCategories.push(
+                copyrightsData[i].copyright_category
+              )
+            }
+          }
+        }
+        this.ownedCopyrights.push(this.creativeWorkIdsObject)
+        for (const ownedCopyright of this.ownedCopyrights) {
+          axios
+            .get(
+              'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works/' +
+                ownedCopyright.creativeWork
+            )
+            .then(response => {
+              ownedCopyright.creativeWorkName = response.data.name
+            })
+        }
+      })
   },
   methods: {
     selectAll() {
@@ -120,6 +146,7 @@ h2 {
   margin: 0;
   width: 100%;
   margin-bottom: 1rem;
+  font-size: 24px ;
 }
 .copyright-list {
   width: 100%;
@@ -129,6 +156,7 @@ h3 {
   margin: 0;
   margin-left: 1.3rem;
   width: 100%;
+  font-size: 18px;
 }
 table {
   width: 100%;

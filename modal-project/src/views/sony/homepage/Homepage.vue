@@ -48,22 +48,18 @@ export default {
   height: fit-content;
 }
 .container {
-  width: 60%;
+  width: 1127px;
   margin: 0 auto;
   padding-bottom: 10rem;
 }
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1199px) {
   .container {
-    width: 100%;
-    margin: 0 auto;
+    width: 933px;
   }
-  .content h1 {
-    width: 100%;
-    color: #00b5ad;
-    text-align: left;
-    border-bottom: 2px solid #00b5ad;
-    padding-bottom: 0.21428571rem;
-    font-size: 25px;
+}
+@media screen and (max-width: 993px) {
+  .container {
+    width: 723px;
   }
 }
 .alert {
@@ -82,6 +78,7 @@ export default {
   text-align: left;
   border-bottom: 2px solid #00b5ad;
   padding-bottom: 0.21428571rem;
+  font-size: 25px;
 }
 .content a {
   float: right;

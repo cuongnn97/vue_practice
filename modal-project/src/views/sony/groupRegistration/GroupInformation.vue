@@ -76,7 +76,6 @@ export default {
       )
       .then(response => {
         this.groupFromDb = response.data
-        console.log(this.groupFromDb)
       })
   },
   components: {

@@ -42,7 +42,6 @@ export default {
       )
       .then(response => {
         this.getPublishers = response.data
-        console.log(this.getPublishers)
       })
   }
 }
@@ -56,6 +55,7 @@ h2 {
   margin: 0;
   width: 100%;
   margin-bottom: 1rem;
+  font-size: 24px;
 }
 .title {
   margin-top: 1.5rem;
@@ -93,6 +93,7 @@ h3 {
   margin-bottom: 1rem;
   margin-top: 1rem;
   margin-left: 1.5rem;
+  font-size: 18px;
 }
 .ui .button {
   background-color: #e0e1e2;
@@ -126,13 +127,5 @@ h3 {
   border: 1px solid #3dc3c3;
   border-radius: 3px;
   font-size: 14px;
-}
-@media screen and (max-width: 1280px) {
-  .publisher-list h3 {
-    font-size: 16px;
-  }
-  #edit-button {
-    font-size: 12px;
-  }
 }
 </style>

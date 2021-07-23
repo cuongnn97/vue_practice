@@ -64,7 +64,6 @@ export default {
       )
       .then(response => {
         this.publisherFromDb = response.data
-        console.log(this.publisherFromDb)
       })
   },
   components: {
