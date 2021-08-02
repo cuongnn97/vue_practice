@@ -10,7 +10,7 @@
           <div class="fields">
             <label>作曲者名</label><br /><br />
             <input
-              v-model="formElements.composerName"
+              v-model="creativeWorkFromDb.creator_ids"
               id="input-text"
               type="text"
               disabled
@@ -19,7 +19,7 @@
           <div class="fields">
             <label>作品名フリガナ</label>
             <input
-              v-model="formElements.workFurigana"
+              v-model="creativeWorkFromDb.name_kana"
               id="input-text"
               type="text"
               disabled
@@ -28,7 +28,7 @@
           <div class="fields">
             <label>作品名</label>
             <input
-              v-model="formElements.title"
+              v-model="creativeWorkFromDb.name"
               id="input-text"
               type="text"
               disabled
@@ -37,7 +37,7 @@
           <div class="fields">
             <label>ジャンル</label>
             <input
-              v-model="formElements.genre"
+              v-model="creativeWorkFromDb.genre"
               id="input-text"
               type="text"
               disabled
@@ -46,7 +46,7 @@
           <div class="fields">
             <label>サブジャンル</label>
             <input
-              v-model="formElements.subGenre"
+              v-model="creativeWorkFromDb.sub_genre"
               id="input-text"
               type="text"
               disabled
@@ -55,7 +55,7 @@
           <div class="fields">
             <label>リリース日</label>
             <input
-              v-model="formElements.releaseDate"
+              v-model="creativeWorkFromDb.release_date"
               id="input-text"
               type="text"
               disabled
@@ -64,7 +64,7 @@
           <div class="fields">
             <label>販売開始日</label>
             <input
-              v-model="formElements.startDate"
+              v-model="creativeWorkFromDb.sale_start_date"
               id="input-text"
               type="text"
               disabled
@@ -76,7 +76,6 @@
               v-model="formElements.transfereeID"
               id="input-text"
               type="text"
-              disabled
             />
           </div>
           <div class="fields" style="display:inline-block">
@@ -87,6 +86,7 @@
             >
               <input
                 :value="copyrightCategory.id"
+                v-model="creativeWorkFromDb.copyright_categories"
                 @change="addCategory(copyrightCategory.id)"
                 class="checkbox-input"
                 type="checkbox"
@@ -118,11 +118,11 @@
               class="radio-field"
             >
               <input
-                v-model="formElements.composerName"
+                v-model="formElements.automatic_renewal"
                 :value="contract.id"
                 type="radio"
               />
-              <span>{{ contract.name }}</span>
+              <span>{{ contract.value }}</span>
             </div>
           </div>
           <div class="action-form">
@@ -144,13 +144,15 @@
 <script>
 import Header from '../Header'
 import Footer from '../Footer'
+import axios from 'axios'
 export default {
   data() {
     return {
-      users: [
-        { id: 'user_id:40c95716-f9be-44db-98d2-bb7d67033716', name: 'cuong' }
+      contracts: [
+        { id: false, value: '無' },
+        { id: true, value: '有' }
       ],
-      pickedSubgenres: [],
+      creativeWorkFromDb: [],
       formElements: {
         creator_ids: [],
         creative_work_name_kana: '',
@@ -159,7 +161,8 @@ export default {
         creative_work_sub_genre: '',
         creative_work_art_work_file: null,
         creative_work_file: null,
-        copyright_categories: []
+        copyright_categories: [],
+        automatic_renewal: true
       },
       genres: this.$store.state.genres,
       subGenres: this.$store.state.subGenres,
@@ -167,43 +170,22 @@ export default {
     }
   },
   created() {
+    axios
+      .get(
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works/' +
+          this.$route.query.creative_work_id
+      )
+      .then(response => {
+        this.creativeWorkFromDb = response.data
+        console.log(this.creativeWorkFromDb)
+      })
     for (let i = 0; i < this.copyrightCategories.length; i++) {
-      this.formElements.copyright_categories.push(this.copyrightCategories[i].id)
+      this.formElements.copyright_categories.push(
+        this.copyrightCategories[i].id
+      )
     }
   },
-  methods: {
-    addCoauthor() {
-      this.formElements.coAuthors.push({ name: '', displayFlag: true })
-    },
-    deleteCoauthor(i) {
-      this.formElements.coAuthors.splice(i, 1)
-    },
-    onChangeGenre(event) {
-      this.pickedSubgenres = []
-      for (let i = 0; i < this.subGenres.length; i++) {
-        if (this.subGenres[i].genreId.toString() === event.target.value) {
-          this.pickedSubgenres.push(this.subGenres[i])
-        }
-      }
-    },
-    onFileChange(event, fileName) {
-      var files = event.target.files || event.dataTransfer.files
-      if (!files.length) return
-      if (fileName === 'artworkFile') {
-        this.formElements.artworkFile = files[0]
-      } else if (fileName === 'copyrightFile') {
-        this.formElements.copyrightFile = files[0]
-      }
-    },
-    addCategory(id) {
-      const index = this.formElements.copyrightCategories.indexOf(id)
-      if (index > -1) {
-        this.formElements.copyrightCategories.splice(index, 1)
-      } else {
-        this.formElements.copyrightCategories.push(id)
-      }
-    }
-  },
+  methods: {},
   components: {
     Header,
     Footer
@@ -277,36 +259,6 @@ body {
   border: 1px solid #dedede;
   border-radius: 3px;
   float: left;
-}
-input[id*='input-text-coauthor'] {
-  width: 50%;
-  margin-bottom: 1rem;
-  padding: 10px 6px;
-  border: 1px solid #dedede;
-  border-radius: 3px;
-  float: left;
-}
-input[id*='input-button'] {
-  float: left;
-  padding: 11px 18px;
-  margin-left: 0.5rem;
-  background-color: #e0e1e2;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #00000099;
-  cursor: pointer;
-}
-input[id*='input-button-delete'] {
-  float: left;
-  padding: 11px 18px;
-  margin-left: 0.5rem;
-  background-color: #e0e1e2;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #00000099;
-  cursor: pointer;
 }
 .radio-field {
   width: 40%;

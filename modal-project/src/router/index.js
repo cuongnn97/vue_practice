@@ -10,7 +10,6 @@ import JobDetails from '../views/jobs/JobDetails.vue'
 import Homepage from '../views/sony/homepage/Homepage.vue'
 import Login from '../views/sony/Login.vue'
 import CopyrightRegistration from '../views/sony/copyrightRegistration/CopyrightRegistration.vue'
-import CopyrightEdit from '../views/sony/copyrightRegistration/CopyrightEdit.vue'
 import CreativeWorksEdit from '../views/sony/creativeWorks/CreativeWorksEdit.vue'
 
 import GroupRegistration from '../views/sony/groupRegistration/GroupRegistration.vue'
@@ -19,6 +18,7 @@ import PublisherRegistration from '../views/sony/publisherRegistration/Publisher
 import PublisherEdit from '../views/sony/publisherRegistration/PublisherEdit.vue'
 import PublisherInformation from '../views/sony/publisherRegistration/PublisherInformation.vue'
 import GroupInformation from '../views/sony/groupRegistration/GroupInformation.vue'
+import ContractsRegistration from '../views/sony/contractsRegistration/ContractsRegistration.vue'
 
 const routes = [
   {
@@ -100,14 +100,14 @@ const routes = [
     component: GroupEdit
   },
   {
-    path: '/copyright/edit',
-    name: 'CopyrightEdit',
-    component: CopyrightEdit
-  },
-  {
     path: '/creative_works/edit',
     name: 'CreativeWorksEdit',
     component: CreativeWorksEdit
+  },
+  {
+    path: '/contracts/new',
+    name: 'ContractsRegistration',
+    component: ContractsRegistration
   },
 
   //END SONY

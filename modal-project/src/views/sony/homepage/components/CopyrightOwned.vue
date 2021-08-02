@@ -41,17 +41,19 @@
               </ul>
             </td>
             <td style="width:130px">
-              <a href="/copyright/edit">著作権譲渡</a>
-              <a class="edit-creative-work"
+              <a :href="'/contracts/new?creative_work_id=' + ownedCopyright.id"
+                >著作権譲渡</a
+              >
+              <a
+                class="edit-creative-work"
                 :href="
                   '/creative_works/edit?creative_work_id=' + ownedCopyright.id
                 "
                 >編集</a
               >
-              <a class="download-creative-work"
-                :href="
-                  '/audio/download?creative_work_id=' + ownedCopyright.id
-                "
+              <a
+                class="download-creative-work"
+                :href="'/audio/download?creative_work_id=' + ownedCopyright.id"
                 >Download</a
               >
             </td>
