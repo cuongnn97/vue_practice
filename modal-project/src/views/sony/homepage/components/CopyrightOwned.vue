@@ -42,11 +42,17 @@
             </td>
             <td style="width:130px">
               <a href="/copyright/edit">著作権譲渡</a>
-              <a
+              <a class="edit-creative-work"
                 :href="
                   '/creative_works/edit?creative_work_id=' + ownedCopyright.id
                 "
                 >編集</a
+              >
+              <a class="download-creative-work"
+                :href="
+                  '/audio/download?creative_work_id=' + ownedCopyright.id
+                "
+                >Download</a
               >
             </td>
           </tr>
@@ -165,6 +171,28 @@ td a {
   background-color: #2185d0;
   text-decoration: none;
   color: white;
+  text-align: center;
+  margin-bottom: 0.1rem;
+  padding: 8px 9px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.edit-creative-work {
+  display: block;
+  background-color: #e0e1e2;
+  text-decoration: none;
+  color: #00000099;
+  text-align: center;
+  margin-bottom: 0.1rem;
+  padding: 8px 9px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.download-creative-work {
+  display: block;
+  background-color: #e0e1e2;
+  text-decoration: none;
+  color: #00000099;
   text-align: center;
   margin-bottom: 0.1rem;
   padding: 8px 9px;
