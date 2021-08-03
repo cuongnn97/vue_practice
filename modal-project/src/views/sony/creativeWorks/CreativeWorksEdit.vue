@@ -10,17 +10,30 @@
           <div class="fields">
             <label>作曲者名</label><br /><br />
             <div
-              v-for="user in creativeWorkFromDb.creator_ids"
-              :key="user"
+              v-for="(user, index) in users"
+              :key="user.id"
               class="radio-field"
             >
               <input
-                v-model="formElements.composerName"
-                :value="user"
+                v-model="creativeWorkFromDb.creator_ids"
+                :value="user.id"
+                type="radio"
+                disabled
+                checked
+              />
+              <span>{{ user.name }}</span>
+            </div>
+            <div
+              v-for="(group, index) in groups"
+              :key="group.id"
+              class="radio-field"
+            >
+              <input
+                :value="group.id"
                 type="radio"
                 disabled
               />
-              <span>{{ user }}</span>
+              <span>{{ group.name }}</span>
             </div>
           </div>
           <div class="fields">
@@ -139,6 +152,9 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      users: [
+        { id: 'user_id:40c95716-f9be-44db-98d2-bb7d67033716', name: 'cuong' }
+      ],
       formElements: {
         creator_ids: [],
         creative_work_name_kana: '',
@@ -151,6 +167,7 @@ export default {
         sale_start_date: '',
         copyright_categories: []
       },
+      groups: [],
       creativeWorkFromDb: [],
       pickedSubgenres: [],
       genres: this.$store.state.genres,
@@ -206,6 +223,13 @@ export default {
               this.creativeWorkFromDb.sale_start_date.length
             )
         }
+      })
+    axios
+      .get(
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/groups'
+      )
+      .then(response => {
+        this.groups = response.data
       })
   },
   methods: {

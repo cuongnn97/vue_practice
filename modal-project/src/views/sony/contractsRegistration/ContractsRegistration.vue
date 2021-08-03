@@ -177,7 +177,38 @@ export default {
       )
       .then(response => {
         this.creativeWorkFromDb = response.data
-        console.log(this.creativeWorkFromDb)
+        if (this.creativeWorkFromDb.release_date !== null) {
+          this.creativeWorkFromDb.release_date =
+            this.creativeWorkFromDb.release_date.substring(0, 4) +
+            '/' +
+            this.creativeWorkFromDb.release_date.substring(
+              4,
+              this.creativeWorkFromDb.release_date.length
+            )
+          this.creativeWorkFromDb.release_date =
+            this.creativeWorkFromDb.release_date.substring(0, 7) +
+            '/' +
+            this.creativeWorkFromDb.release_date.substring(
+              7,
+              this.creativeWorkFromDb.release_date.length
+            )
+        }
+        if (this.creativeWorkFromDb.sale_start_date !== null) {
+          this.creativeWorkFromDb.sale_start_date =
+            this.creativeWorkFromDb.sale_start_date.substring(0, 4) +
+            '/' +
+            this.creativeWorkFromDb.sale_start_date.substring(
+              4,
+              this.creativeWorkFromDb.sale_start_date.length
+            )
+          this.creativeWorkFromDb.sale_start_date =
+            this.creativeWorkFromDb.sale_start_date.substring(0, 7) +
+            '/' +
+            this.creativeWorkFromDb.sale_start_date.substring(
+              7,
+              this.creativeWorkFromDb.sale_start_date.length
+            )
+        }
       })
     for (let i = 0; i < this.copyrightCategories.length; i++) {
       this.formElements.copyright_categories.push(

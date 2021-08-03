@@ -236,20 +236,20 @@ export default {
         '-',
         ''
       )
-      // axios
-      //   .post(
-      //     'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works',
-      //     JSON.stringify(this.formElements)
-      //   )
-      //   .then(response => {
-      //     //window.location.href = '/'
-      //     console.log(response)
-      //   })
-      //   .catch(error => {
-      //     if (error.response !== undefined) {
-      //       this.errorMessage = error.response.data.message
-      //     }
-      //   })
+      axios
+        .post(
+          'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works',
+          JSON.stringify(this.formElements)
+        )
+        .then(response => {
+          //window.location.href = '/'
+          console.log(response)
+        })
+        .catch(error => {
+          if (error.response !== undefined) {
+            this.errorMessage = error.response.data.message
+          }
+        })
         console.log(this.formElements.creative_work_art_work_file)
         console.log(this.formElements.creative_work_file)
     }
