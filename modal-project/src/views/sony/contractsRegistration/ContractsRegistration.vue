@@ -2,6 +2,9 @@
   <div>
     <Header :rightMenu="true" />
     <div class="main-content">
+      <div class="alert" v-if="errorMessage">
+        {{ errorMessage }}
+      </div>
       <h1>
         著作権譲渡
       </h1>
@@ -73,7 +76,7 @@
           <div class="fields">
             <label>譲受人ID</label>
             <input
-              v-model="formElements.transfereeID"
+              v-model="formElements.assignee_ids"
               id="input-text"
               type="text"
             />
@@ -98,13 +101,13 @@
           <div class="fields">
             <label>契約期間</label>
             <input
-              v-model="formElements.releaseDate"
+              v-model="formElements.start_date"
               id="input-range-date"
               type="date"
             />
             <span>~</span>
             <input
-              v-model="formElements.releaseDate"
+              v-model="formElements.end_date"
               id="input-range-date"
               type="date"
               style="float: right"
@@ -118,7 +121,7 @@
               class="radio-field"
             >
               <input
-                v-model="formElements.automatic_renewal"
+                v-model="formElements.auto_renewal"
                 :value="contract.id"
                 type="radio"
               />
@@ -127,7 +130,7 @@
           </div>
           <div class="action-form">
             <a class="cancel-button" href="/homepage">キャンセル</a>
-            <a class="register-button" href="/creative_works">著作物登録</a>
+            <a class="register-button" @click="createContracts()">著作物登録</a>
           </div>
         </div>
         <div class="image-content">
@@ -154,19 +157,19 @@ export default {
       ],
       creativeWorkFromDb: [],
       formElements: {
-        creator_ids: [],
-        creative_work_name_kana: '',
-        creative_work_name: '',
-        creative_work_genre: '',
-        creative_work_sub_genre: '',
-        creative_work_art_work_file: null,
-        creative_work_file: null,
-        copyright_categories: [],
-        automatic_renewal: true
+        creator_id: '',
+        assignor_ids: '',
+        assignee_ids: '',
+        creative_work_id: '',
+        start_date: '',
+        end_date: '',
+        auto_renewal: true,
+        copyright_categories: []
       },
       genres: this.$store.state.genres,
       subGenres: this.$store.state.subGenres,
-      copyrightCategories: this.$store.state.copyrightCategories
+      copyrightCategories: this.$store.state.copyrightCategories,
+      errorMessage: ''
     }
   },
   created() {
@@ -216,7 +219,35 @@ export default {
       )
     }
   },
-  methods: {},
+  methods: {
+    createContracts() {
+      this.formElements.creator_id = this.$route.query.owner_id
+      this.formElements.assignor_ids = this.creativeWorkFromDb.creator_ids
+      this.formElements.creative_work_id = this.$route.query.creative_work_id
+      this.formElements.copyright_categories = this.creativeWorkFromDb.copyright_categories
+      this.formElements.start_date = this.formElements.start_date.replaceAll(
+        '-',
+        ''
+      )
+      this.formElements.end_date = this.formElements.end_date.replaceAll(
+        '-',
+        ''
+      )
+      axios
+        .post(
+          'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/contracts',
+          JSON.stringify(this.formElements)
+        )
+        .then(response => {
+          window.location.href = '/'
+        })
+        .catch(error => {
+          if (error.response !== undefined) {
+            this.errorMessage = error.response.data.message
+          }
+        })
+    }
+  },
   components: {
     Header,
     Footer
@@ -250,6 +281,16 @@ body {
   width: 100%;
   position: relative;
   height: fit-content;
+}
+.alert {
+  width: 96.5%;
+  color: #9f3a38;
+  background-color: #fff6f6;
+  padding: 14px 21px;
+  text-align: left;
+  border: 1px solid #e1b7b7;
+  border-radius: 3px;
+  font-size: 14px;
 }
 .container {
   display: flex;

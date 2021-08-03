@@ -41,7 +41,7 @@
               </ul>
             </td>
             <td style="width:130px">
-              <a :href="'/contracts/new?creative_work_id=' + ownedCopyright.id"
+              <a :href="'/contracts/new?creative_work_id=' + ownedCopyright.id + '&' + 'owner_id=user_id:40c95716-f9be-44db-98d2-bb7d67033716'"
                 >著作権譲渡</a
               >
               <a
