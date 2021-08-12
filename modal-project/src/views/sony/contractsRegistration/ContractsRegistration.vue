@@ -13,7 +13,7 @@
           <div class="fields">
             <label>作曲者名</label><br /><br />
             <input
-              v-model="creativeWorkFromDb.creator_ids"
+              v-model="creativeWorkFromDb.user_name"
               id="input-text"
               type="text"
               disabled
@@ -180,6 +180,14 @@ export default {
       )
       .then(response => {
         this.creativeWorkFromDb = response.data
+        axios
+          .get(
+            'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/' +
+              this.creativeWorkFromDb.creator_ids
+          )
+          .then(response => {
+            this.creativeWorkFromDb.user_name = response.data.name
+          })
         if (this.creativeWorkFromDb.release_date !== null) {
           this.creativeWorkFromDb.release_date =
             this.creativeWorkFromDb.release_date.substring(0, 4) +

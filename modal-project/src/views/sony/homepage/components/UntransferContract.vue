@@ -16,13 +16,13 @@
             v-for="ownedCopyright in ownedCopyrights"
             :key="ownedCopyright.id"
           >
-            <td>{{ ownedCopyright.creativeWork }}</td>
+            <td>{{ ownedCopyright.creative_work_name }}</td>
             <td>
               <span style="font-weight:bold">Original</span>
               <ul>
                 <li
                   v-for="(copyrightCategory,
-                  i) in ownedCopyright.copyrightCategories"
+                  i) in ownedCopyright.copyright_categories"
                   :key="i"
                 >
                   {{ copyrightCategory }}
@@ -39,52 +39,31 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      displayFlag: true,
-      ownedCopyrights: [
-        {
-          creativeWork: 'Job 1',
-          copyrightCategories: [
-            'RIGHTS_OF_RECORDING_TO_VIDEOGRAMS_ETC',
-            'RIGHTS_OF_INTERACTIVE_DISTRIBUTION',
-            'RIGHTS_OF_REPRODUCTION_FOR_ADVERTISEMENTS',
-            'RIGHTS_OF_COMMERCIAL_ON_DEMAND_KARAOKE'
-          ],
-          id: 1
-        },
-        {
-          creativeWork: 'Job 2',
-          copyrightCategories: [
-            'RIGHTS_OF_RECORDING_TO_VIDEOGRAMS_ETC',
-            'RIGHTS_OF_INTERACTIVE_DISTRIBUTION',
-            'RIGHTS_OF_REPRODUCTION_FOR_ADVERTISEMENTS',
-            'RIGHTS_OF_COMMERCIAL_ON_DEMAND_KARAOKE'
-          ],
-          id: 2
-        }
-      ],
-      allSelected: false,
-      ownedCopyrightIds: []
+      ownedCopyrights: []
     }
   },
-  methods: {
-    selectAll() {
-      this.ownedCopyrightIds = []
-      if (!this.allSelected) {
-        for (let i = 0; i < this.ownedCopyrights.length; i++) {
-          this.ownedCopyrightIds.push(this.ownedCopyrights[i].id)
+  created() {
+    axios
+      .get(
+        'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/users/user_id:40c95716-f9be-44db-98d2-bb7d67033716/contracts'
+      )
+      .then(response => {
+        this.ownedCopyrights = response.data
+        for (const ownedCopyright of this.ownedCopyrights) {
+          axios
+            .get(
+              'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works/' +
+                ownedCopyright.creative_work_id
+            )
+            .then(response => {
+              ownedCopyright.creative_work_name = response.data.name
+            })
         }
-      }
-    },
-    select(id) {
-      this.allSelected = false
-      const index = this.ownedCopyrightIds.indexOf(id)
-      if (index > -1) {
-        this.ownedCopyrightIds.splice(index, 1)
-      }
-    }
+      })
   }
 }
 </script>

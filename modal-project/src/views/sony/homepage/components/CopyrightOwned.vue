@@ -1,81 +1,12 @@
 <template>
   <div>
     <h2>個人所有の著作権一覧</h2>
-    <div v-if="ownedCopyrights.length" class="copyright-list">
-      <h3>cuongが所有する著作権一覧</h3>
-      <table>
-        <thead>
-          <tr>
-            <th style="width:5%;text-align:center">
-              <input type="checkbox" @click="selectAll" v-model="allSelected" />
-            </th>
-            <th @click="checkId" style="width:22.4%">Creative Work</th>
-            <th style="width:59%">Copyright Categories</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="ownedCopyright in ownedCopyrights"
-            :key="ownedCopyright.id"
-          >
-            <td style="text-align:center">
-              <input
-                type="checkbox"
-                @click="select(ownedCopyright.id)"
-                :value="ownedCopyright.id"
-                v-model="ownedCopyrightIds"
-              />
-            </td>
-            <td>{{ ownedCopyright.name }}</td>
-            <td>
-              <span style="font-weight:bold">Original</span>
-              <ul>
-                <li
-                  v-for="(copyrightCategory,
-                  i) in ownedCopyright.copyright_categories"
-                  :key="i"
-                >
-                  {{ copyrightCategory }}
-                </li>
-              </ul>
-            </td>
-            <td style="width:130px">
-              <a :href="'/contracts/new?creative_work_id=' + ownedCopyright.id + '&' + 'owner_id=user_id:40c95716-f9be-44db-98d2-bb7d67033716'"
-                >著作権譲渡</a
-              >
-              <a
-                class="edit-creative-work"
-                :href="
-                  '/creative_works/edit?creative_work_id=' + ownedCopyright.id
-                "
-                >編集</a
-              >
-              <a
-                class="download-creative-work"
-                :href="'/audio/download?creative_work_id=' + ownedCopyright.id"
-                >Download</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <a
-        class="download-button"
-        target="_blank"
-        data-no-turbolink="false"
-        id="user_orchard"
-        href="/orchard_files/download"
-        >チェックした曲のThe Orchard Bulk Uploadファイルをダウンロード</a
-      >
-    </div>
-    <div v-else class="notification">
-      著作権はありません
-    </div>
+    <CopyrightList :ownerId="'user_id:40c95716-f9be-44db-98d2-bb7d67033716'" />
   </div>
 </template>
 <script>
 import axios from 'axios'
+import CopyrightList from './CopyrightList'
 export default {
   data() {
     return {
@@ -110,22 +41,9 @@ export default {
         }
       })
   },
-  methods: {
-    selectAll() {
-      this.ownedCopyrightIds = []
-      if (!this.allSelected) {
-        for (let i = 0; i < this.ownedCopyrights.length; i++) {
-          this.ownedCopyrightIds.push(this.ownedCopyrights[i].id)
-        }
-      }
-    },
-    select(id) {
-      this.allSelected = false
-      const index = this.ownedCopyrightIds.indexOf(id)
-      if (index > -1) {
-        this.ownedCopyrightIds.splice(index, 1)
-      }
-    }
+  methods: {},
+  components: {
+    CopyrightList
   }
 }
 </script>

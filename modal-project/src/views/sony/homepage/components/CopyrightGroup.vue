@@ -7,21 +7,20 @@
       </h2>
     </div>
     <div v-if="groups.length" class="group-list">
-      <a
-        class="download-button"
-        target="_blank"
-        data-no-turbolink="false"
-        id="group_orchard"
-        href="/orchard_files/download"
-        >チェックした曲のThe Orchard Bulk Uploadファイルをダウンロード</a
-      >
-      <h3 v-for="(group, i) in groups" :key="i">
-        {{ group.name }}が所有する著作権一覧
-        <a id="edit-button" :href="'/groups/edit?group_id=' + group.id">編集</a>
-        <a id="group-registration-button" :href="'groups?group_id=' + group.id"
-          >グループ詳細</a
-        >
-      </h3>
+      <div v-for="(group, i) in groups" :key="i">
+        <h3>
+          {{ group.name }}が所有する著作権一覧
+          <a id="edit-button" :href="'/groups/edit?group_id=' + group.id"
+            >編集</a
+          >
+          <a
+            id="group-registration-button"
+            :href="'groups?group_id=' + group.id"
+            >グループ詳細</a
+          >
+        </h3>
+        <CopyrightList :ownerId="group.id" />
+      </div>
     </div>
     <div v-else class="notification">
       グループはありません
@@ -30,10 +29,13 @@
 </template>
 <script>
 import axios from 'axios'
+import CopyrightList from './CopyrightList'
 export default {
   data() {
     return {
-      groups: []
+      groups: [],
+      ownedCopyrights: [],
+      creativeWorkIds: []
     }
   },
   created() {
@@ -44,6 +46,9 @@ export default {
       .then(response => {
         this.groups = response.data
       })
+  },
+  components: {
+    CopyrightList
   }
 }
 </script>
