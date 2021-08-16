@@ -39,13 +39,30 @@
           </div>
           <div class="fields">
             <label>共作者追加</label>
-            <div class="input-coauthor">
+            <div
+              v-for="(coAuthor, i) in coAuthors"
+              :key="i"
+              class="input-coauthor"
+            >
               <input
-                :id="'input-text-coauthor'"
-                placeholder="作曲者IDs"
+                :id="'input-text-coauthor-' + i"
+                v-model="coAuthor.id"
+                placeholder="作曲者ID"
                 type="text"
               />
-              <input :id="'input-button'" type="button" value="ADD" />
+              <input
+                :id="'input-button-' + i"
+                type="button"
+                @click="addCoauthor"
+                value="ADD"
+              />
+              <input
+                :id="'input-button-delete-' + i"
+                type="button"
+                @click="deleteCoauthor(i)"
+                value="DELETE"
+                v-show="coAuthor.displayFlag"
+              />
             </div>
           </div>
           <div class="fields">
@@ -168,6 +185,7 @@ export default {
       ],
       groups: [],
       pickedSubgenres: [],
+      coAuthors: [{ id: '', displayFlag: false }],
       formElements: {
         creator_ids: [],
         creative_work_name_kana: '',
@@ -228,6 +246,12 @@ export default {
         this.formElements.copyright_categories.push(id)
       }
     },
+    addCoauthor() {
+      this.coAuthors.push({ id: '', displayFlag: true })
+    },
+    deleteCoauthor(i) {
+      this.coAuthors.splice(i, 1)
+    },
     uploadFile(file, type) {
       var fileName = file.name
       var albumPhotosKey = 'creative_works/'
@@ -266,20 +290,28 @@ export default {
         })
     },
     register() {
-      // this.formElements.release_date = this.formElements.release_date.replaceAll(
-      //   '-',
-      //   ''
-      // )
-      // this.formElements.sale_start_date = this.formElements.sale_start_date.replaceAll(
-      //   '-',
-      //   ''
-      // )
-      // //UPLOAD FILE TO S3
-      // this.uploadFile(
-      //   this.creative_work_art_work_file,
-      //   'creative_work_art_work_file'
-      // )
-      // this.uploadFile(this.creative_work_file, 'creative_work_file')
+      this.formElements.creator_ids.length = 1;
+      if (this.coAuthors.length > 0) {
+        for (let i = 0; i < this.coAuthors.length; i++) {
+          if (this.coAuthors[i].id !== '') {
+            this.formElements.creator_ids.push(this.coAuthors[i].id)
+          }
+        }
+      }
+      this.formElements.release_date = this.formElements.release_date.replaceAll(
+        '-',
+        ''
+      )
+      this.formElements.sale_start_date = this.formElements.sale_start_date.replaceAll(
+        '-',
+        ''
+      )
+      //UPLOAD FILE TO S3
+      this.uploadFile(
+        this.creative_work_art_work_file,
+        'creative_work_art_work_file'
+      )
+      this.uploadFile(this.creative_work_file, 'creative_work_file')
     },
     formatkey(str) {
       var getString =
