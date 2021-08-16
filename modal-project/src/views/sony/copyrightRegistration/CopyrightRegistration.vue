@@ -42,7 +42,7 @@
             <div class="input-coauthor">
               <input
                 :id="'input-text-coauthor'"
-                placeholder="作曲者ID"
+                placeholder="作曲者IDs"
                 type="text"
               />
               <input :id="'input-button'" type="button" value="ADD" />
