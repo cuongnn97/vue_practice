@@ -1,7 +1,6 @@
 <template>
   <div>
     <div v-if="ownedCopyrights.length" class="copyright-list">
-      <h3>cuongが所有する著作権一覧</h3>
       <table>
         <thead>
           <tr>
@@ -70,7 +69,7 @@
         target="_blank"
         data-no-turbolink="false"
         id="user_orchard"
-        href="/orchard_files/download"
+        @click="downloadOrchardFiles"
         >チェックした曲のThe Orchard Bulk Uploadファイルをダウンロード</a
       >
     </div>
@@ -138,36 +137,33 @@ export default {
           this.ownedCopyrightIds.push(this.ownedCopyrights[i].id)
         }
       }
-      console.log(this.ownedCopyrightIds)
-      this.setDownloadButton()
     },
     select(id) {
       this.allSelected = false
-      console.log(this.ownedCopyrightIds)
       const index = this.ownedCopyrightIds.indexOf(id)
       if (index > -1) {
         this.ownedCopyrightIds.splice(index, 1)
       } else {
         this.ownedCopyrightIds.push(id)
       }
-      this.setDownloadButton()
     },
-    setDownloadButton() {
-      var a = document.getElementById('user_orchard')
-      a.href = '/orchard_files/download'
+    downloadOrchardFiles() {
       if (this.ownedCopyrightIds.length > 0) {
-        for (let i = 0; i < this.ownedCopyrightIds.length; i++) {
-          if (i == 0) {
-            a.href += '?' + this.ownedCopyrightIds[i]
-          } else if (i == this.ownedCopyrightIds.length - 1) {
-            a.href += this.ownedCopyrightIds[i]
-          } else {
-            a.href += this.ownedCopyrightIds[i] + ','
-          }
-        }
-      } else {
-        a.href = '/orchard_files/download'
-      } 
+        axios
+          .post(
+            'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/orchard',
+            {"creative_work_ids" : this.ownedCopyrightIds.toString()}
+          )
+          .then(response => {
+            console.log(response)
+            window.open('https://bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh.s3.ap-northeast-1.amazonaws.com/' + response.data.s3_key)
+          })
+          .catch(error => {
+            if (error.response !== undefined) {
+              this.errorMessage = error.response.data.message
+            }
+          })
+      }
     }
   }
 }
@@ -185,13 +181,6 @@ h2 {
 }
 .copyright-list {
   width: 100%;
-}
-h3 {
-  text-align: left;
-  margin: 0;
-  margin-left: 1.3rem;
-  width: 100%;
-  font-size: 18px;
 }
 table {
   width: 100%;

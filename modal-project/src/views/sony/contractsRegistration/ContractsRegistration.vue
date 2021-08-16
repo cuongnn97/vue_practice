@@ -2,12 +2,12 @@
   <div>
     <Header :rightMenu="true" />
     <div class="main-content">
-      <div class="alert" v-if="errorMessage">
-        {{ errorMessage }}
-      </div>
       <h1>
         著作権譲渡
       </h1>
+      <div class="alert" v-if="errorMessage">
+        {{ errorMessage }}
+      </div>
       <div class="container">
         <div class="content">
           <div class="fields">
@@ -98,20 +98,22 @@
               <span>{{ copyrightCategory.name }}</span>
             </div>
           </div>
-          <div class="fields">
+          <div class="fields" style="display:grid;">
             <label>契約期間</label>
-            <input
-              v-model="formElements.start_date"
-              id="input-range-date"
-              type="date"
-            />
-            <span>~</span>
-            <input
-              v-model="formElements.end_date"
-              id="input-range-date"
-              type="date"
-              style="float: right"
-            />
+            <div class="range-date">
+              <input
+                v-model="formElements.start_date"
+                id="input-range-date"
+                type="date"
+              />
+              <span>~</span>
+              <input
+                v-model="formElements.end_date"
+                id="input-range-date"
+                type="date"
+                style="float: right"
+              />
+            </div>
           </div>
           <div class="fields">
             <label>契約自動更新</label><br /><br />
@@ -136,7 +138,11 @@
         <div class="image-content">
           <label>アートワーク</label>
           <img
-            src="https://bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh.s3.ap-northeast-1.amazonaws.com/creative_works/art_work_files/creative_work_id%3Ab537cace-f392-4e25-a4cf-ff49fa10c5d8_20210526041506.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAU4VMWPH3LDYUANOG%2F20210716%2Fap-northeast-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210716T024421Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=b91a76f0de513ed5ebf3b85630fe0ba2b12eac7e38d9eeea48cf7b3819ec2319"
+            :src="
+              'https://bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh.s3.ap-northeast-1.amazonaws.com/' +
+                creativeWorkFromDb.art_work_file_path
+            "
+            alt="a"
           />
         </div>
       </div>
@@ -341,7 +347,7 @@ body {
   float: left;
 }
 .radio-field {
-  width: 40%;
+  width: 45%;
   float: left;
   text-align: left;
   margin-bottom: 1rem;
@@ -352,6 +358,11 @@ body {
   border: 1px solid #dedede;
   border-radius: 3px;
   background-color: white;
+}
+.fields .range-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
 }
 .checkbox-field {
   width: 40%;
@@ -388,13 +399,20 @@ body {
   font-size: 14px;
   margin-left: 0.3rem;
 }
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1199px) {
   .container {
-    width: 90%;
-    margin: 0 auto;
+    width: 933px;
   }
   .main-content h1 {
-    width: 90%;
+    width: 933px;
+  }
+}
+@media screen and (max-width: 993px) {
+  .container {
+    width: 723px;
+  }
+  .main-content h1 {
+    width: 723px;
   }
 }
 </style>

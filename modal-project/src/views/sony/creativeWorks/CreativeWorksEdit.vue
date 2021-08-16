@@ -108,6 +108,7 @@
               id="input-text"
               type="file"
             />
+            <img :src="'https://bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh.s3.ap-northeast-1.amazonaws.com/' + creativeWorkFromDb.art_work_file_path" alt="a" />
           </div>
           <div class="fields">
             <label>著作物ファイル</label>
@@ -117,6 +118,7 @@
               type="file"
               disabled
             />
+            
           </div>
           <div class="fields">
             <div
@@ -183,6 +185,7 @@ export default {
       )
       .then(response => {
         this.creativeWorkFromDb = response.data
+        console.log(this.creativeWorkFromDb)
         for (let i = 0; i < this.subGenres.length; i++) {
           if (
             this.subGenres[i].genres.toString() ===
@@ -291,6 +294,13 @@ body {
 }
 .fields {
   margin-bottom: 1rem;
+}
+.fields img {
+  height: 150px;
+  width: 150px;
+  float: left;
+  display: flex;
+  
 }
 .fields label {
   color: #000000de;
