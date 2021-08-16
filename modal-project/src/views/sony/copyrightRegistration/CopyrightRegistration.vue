@@ -52,7 +52,7 @@
             <label>作品名フリガナ</label>
             <input
               v-model="formElements.creative_work_name_kana"
-              id="input-text"
+              id="input-text-name-kana"
               type="text"
             />
           </div>
@@ -60,7 +60,7 @@
             <label>作品名</label>
             <input
               v-model="formElements.creative_work_name"
-              id="input-text"
+              id="input-text-name"
               type="text"
             />
           </div>
@@ -147,9 +147,7 @@
           </div>
           <div class="action-form">
             <a class="cancel-button" href="/homepage">キャンセル</a>
-            <a class="register-button" @click="createCreativeWorks"
-              >著作物登録</a
-            >
+            <a class="register-button" @click="register">著作物登録</a>
           </div>
         </div>
       </div>
@@ -161,6 +159,7 @@
 import Header from '../Header'
 import Footer from '../Footer'
 import axios from 'axios'
+import AWS from 'aws-sdk'
 export default {
   data() {
     return {
@@ -175,12 +174,14 @@ export default {
         creative_work_name: '',
         creative_work_genre: '',
         creative_work_sub_genre: '',
-        creative_work_art_work_file: null,
-        creative_work_file: null,
+        creative_work_art_work_file: '',
+        creative_work_file: '',
         release_date: '',
         sale_start_date: '',
         copyright_categories: []
       },
+      creative_work_file: null,
+      creative_work_art_work_file: null,
       errorMessage: '',
       genres: this.$store.state.genres,
       subGenres: this.$store.state.subGenres,
@@ -213,15 +214,10 @@ export default {
     onFileChange(event, fileName) {
       var files = event.target.files || event.dataTransfer.files
       if (!files.length) return
-      var bucket_name = 'bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh/'
       if (fileName === 'artworkFile') {
-        files[0].name = bucket_name
-        //console.log("bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh/" + files[0].name)
-        this.formElements.creative_work_art_work_file = files[0]
+        this.creative_work_art_work_file = files[0]
       } else if (fileName === 'copyrightFile') {
-        //files[0].name = "bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh/" + files[0].name;
-        files[0].name = bucket_name
-        this.formElements.creative_work_file = files[0]
+        this.creative_work_file = files[0]
       }
     },
     addCategory(id) {
@@ -232,31 +228,80 @@ export default {
         this.formElements.copyright_categories.push(id)
       }
     },
+    uploadFile(file, type) {
+      var fileName = file.name
+      var albumPhotosKey = 'creative_works/'
+
+      var photoKey = albumPhotosKey + fileName
+
+      // Use S3 ManagedUpload class as it supports multipart uploads
+      AWS.config.region = 'ap-northeast-1'
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'ap-northeast-1:f9f79180-8602-4034-a400-8db839a07c45'
+      })
+      var upload = new AWS.S3.ManagedUpload({
+        params: {
+          Bucket: 'bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh',
+          Key: photoKey,
+          Body: file
+        }
+      })
+
+      upload
+        .promise()
+        .then(data => {
+          if (type == 'creative_work_file') {
+            this.formElements.creative_work_file = this.formatkey(
+              data.Location.replaceAll('https://', '')
+            )
+            this.createCreativeWorks()
+          } else if (type == 'creative_work_art_work_file') {
+            this.formElements.creative_work_art_work_file = this.formatkey(
+              data.Location.replaceAll('https://', '')
+            )
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    register() {
+      // this.formElements.release_date = this.formElements.release_date.replaceAll(
+      //   '-',
+      //   ''
+      // )
+      // this.formElements.sale_start_date = this.formElements.sale_start_date.replaceAll(
+      //   '-',
+      //   ''
+      // )
+      // //UPLOAD FILE TO S3
+      // this.uploadFile(
+      //   this.creative_work_art_work_file,
+      //   'creative_work_art_work_file'
+      // )
+      // this.uploadFile(this.creative_work_file, 'creative_work_file')
+    },
+    formatkey(str) {
+      var getString =
+        str.split('.')[0] + '/' + str.split('/')[1] + '/' + str.split('/')[2]
+      return getString
+    },
     createCreativeWorks() {
-      this.formElements.release_date = this.formElements.release_date.replaceAll(
-        '-',
-        ''
-      )
-      this.formElements.sale_start_date = this.formElements.sale_start_date.replaceAll(
-        '-',
-        ''
-      )
-      console.log(this.formElements.creative_work_art_work_file)
-      console.log(this.formElements.creative_work_file)
-      // axios
-      //   .post(
-      //     'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works',
-      //     this.formElements
-      //   )
-      //   .then(response => {
-      //     //window.location.href = '/'
-      //     console.log(response)
-      //   })
-      //   .catch(error => {
-      //     if (error.response !== undefined) {
-      //       this.errorMessage = error.response.data.message
-      //     }
-      //   })
+      console.log(JSON.stringify(this.formElements))
+      axios
+        .post(
+          'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works',
+          JSON.stringify(this.formElements)
+        )
+        .then(response => {
+          //window.location.href = '/'
+          console.log(response)
+        })
+        .catch(error => {
+          if (error.response !== undefined) {
+            this.errorMessage = error.response.data.message
+          }
+        })
     }
   },
   components: {

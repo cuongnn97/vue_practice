@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@j-t-mcc/vue3-chartjs": "^1.1.1",
+    "aws-s3": "^2.0.5",
+    "aws-sdk": "^2.967.0",
     "axios": "^0.21.1",
     "chart.js": "^3.2.1",
     "core-js": "^3.6.5",
