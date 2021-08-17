@@ -12,7 +12,7 @@
               <input
                 name="publisher[name_kana]"
                 v-model="formElements.publisher_name_kana"
-                id="input-text"
+                class="input-text"
                 type="text"
               />
             </div>
@@ -21,7 +21,7 @@
               <input
                 name="publisher[name]"
                 v-model="formElements.publisher_name"
-                id="input-text"
+                class="input-text"
                 type="text"
               />
             </div>
@@ -30,12 +30,12 @@
               <input
                 name="publisher[jasrac_member_id]"
                 v-model="formElements.jasrac_member_id"
-                id="input-text"
+                class="input-text"
                 type="text"
               />
             </div>
             <div class="action-form">
-              <a class="cancel-button" href="/homepage">キャンセル</a>
+              <a class="cancel-button" href="/">キャンセル</a>
               <input
                 type="submit"
                 value="出版社登録"
@@ -117,7 +117,7 @@ body {
   text-align: left;
   margin-bottom: 0.5rem;
 }
-#input-text {
+.input-text {
   width: 100%;
   padding: 10px 6px;
   border: 1px solid #dedede;

@@ -18,7 +18,7 @@
               class="radio-field"
             >
               <input
-                v-model="formElements.creator_ids[index]"
+                v-model="formElements.creator_ids[0]"
                 :value="user.id"
                 type="radio"
               />
@@ -30,7 +30,7 @@
               class="radio-field"
             >
               <input
-                v-model="formElements.creator_ids[index]"
+                v-model="formElements.creator_ids[0]"
                 :value="group.id"
                 type="radio"
               />
@@ -163,7 +163,7 @@
             </div>
           </div>
           <div class="action-form">
-            <a class="cancel-button" href="/homepage">キャンセル</a>
+            <a class="cancel-button" href="/">キャンセル</a>
             <a class="register-button" @click="register">著作物登録</a>
           </div>
         </div>
@@ -326,7 +326,6 @@ export default {
           JSON.stringify(this.formElements)
         )
         .then(response => {
-          //window.location.href = '/'
           console.log(response)
         })
         .catch(error => {

@@ -46,7 +46,7 @@
             </tbody>
           </table>
           <div class="return-button">
-            <a href="/homepage">戻る</a>
+            <a href="/">戻る</a>
           </div>
         </div>
       </div>

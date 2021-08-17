@@ -12,7 +12,7 @@
             <input
               name="group[name_kana]"
               v-model="groupFromDb.name"
-              id="input-text"
+              class="input-text"
               type="text"
             />
           </div>
@@ -21,12 +21,12 @@
             <input
               name="group[name]"
               v-model="groupFromDb.name_kana"
-              id="input-text"
+              class="input-text"
               type="text"
             />
           </div>
           <div class="action-form">
-            <a class="cancel-button" href="/homepage">キャンセル</a>
+            <a class="cancel-button" href="/">キャンセル</a>
             <input
               type="submit"
               value="グループ登録"
@@ -119,7 +119,7 @@ body {
   text-align: left;
   margin-bottom: 0.5rem;
 }
-#input-text {
+.input-text {
   width: 100%;
   padding: 10px 6px;
   border: 1px solid #dedede;

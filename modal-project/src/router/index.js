@@ -23,8 +23,8 @@ import ContractsRegistration from '../views/sony/contractsRegistration/Contracts
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Homepage',
+    component: Homepage
   },
   {
     path: '/jobs',
@@ -56,8 +56,8 @@ const routes = [
   //SONY
   {
     path: '/homepage',
-    name: 'Homepage',
-    component: Homepage
+    name: 'Home',
+    component: Home
   },
   {
     path: '/login',

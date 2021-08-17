@@ -14,7 +14,7 @@
             <label>作曲者名</label><br /><br />
             <input
               v-model="creativeWorkFromDb.user_name"
-              id="input-text"
+              class="input-text"
               type="text"
               disabled
             />
@@ -23,7 +23,7 @@
             <label>作品名フリガナ</label>
             <input
               v-model="creativeWorkFromDb.name_kana"
-              id="input-text"
+              class="input-text"
               type="text"
               disabled
             />
@@ -32,7 +32,7 @@
             <label>作品名</label>
             <input
               v-model="creativeWorkFromDb.name"
-              id="input-text"
+              class="input-text"
               type="text"
               disabled
             />
@@ -41,7 +41,7 @@
             <label>ジャンル</label>
             <input
               v-model="creativeWorkFromDb.genre"
-              id="input-text"
+              class="input-text"
               type="text"
               disabled
             />
@@ -50,7 +50,7 @@
             <label>サブジャンル</label>
             <input
               v-model="creativeWorkFromDb.sub_genre"
-              id="input-text"
+              class="input-text"
               type="text"
               disabled
             />
@@ -59,7 +59,7 @@
             <label>リリース日</label>
             <input
               v-model="creativeWorkFromDb.release_date"
-              id="input-text"
+              class="input-text"
               type="text"
               disabled
             />
@@ -68,7 +68,7 @@
             <label>販売開始日</label>
             <input
               v-model="creativeWorkFromDb.sale_start_date"
-              id="input-text"
+              class="input-text"
               type="text"
               disabled
             />
@@ -77,7 +77,7 @@
             <label>譲受人ID</label>
             <input
               v-model="formElements.assignee_ids"
-              id="input-text"
+              class="input-text"
               type="text"
             />
           </div>
@@ -131,7 +131,7 @@
             </div>
           </div>
           <div class="action-form">
-            <a class="cancel-button" href="/homepage">キャンセル</a>
+            <a class="cancel-button" href="/">キャンセル</a>
             <a class="register-button" @click="createContracts()">著作物登録</a>
           </div>
         </div>
@@ -333,7 +333,7 @@ body {
   text-align: left;
   margin-bottom: 0.5rem;
 }
-#input-text {
+.input-text {
   width: 100%;
   padding: 10px 6px;
   border: 1px solid #dedede;

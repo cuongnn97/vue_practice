@@ -15,11 +15,10 @@
               class="radio-field"
             >
               <input
-                v-model="creativeWorkFromDb.creator_ids"
+                v-model="creatorId"
                 :value="user.id"
                 type="radio"
                 disabled
-                checked
               />
               <span>{{ user.name }}</span>
             </div>
@@ -29,6 +28,7 @@
               class="radio-field"
             >
               <input
+                v-model="creatorId"
                 :value="group.id"
                 type="radio"
                 disabled
@@ -40,7 +40,7 @@
             <label>作品名フリガナ</label>
             <input
               v-model="creativeWorkFromDb.name_kana"
-              id="input-text"
+              id="input-text-name-kana"
               type="text"
             />
           </div>
@@ -48,7 +48,7 @@
             <label>作品名</label>
             <input
               v-model="creativeWorkFromDb.name"
-              id="input-text"
+              id="input-text-name"
               type="text"
             />
           </div>
@@ -108,7 +108,13 @@
               id="input-text"
               type="file"
             />
-            <img :src="'https://bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh.s3.ap-northeast-1.amazonaws.com/' + creativeWorkFromDb.art_work_file_path" alt="a" />
+            <img
+              :src="
+                'https://bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh.s3.ap-northeast-1.amazonaws.com/' +
+                  creativeWorkFromDb.art_work_file_path
+              "
+              alt="a"
+            />
           </div>
           <div class="fields">
             <label>著作物ファイル</label>
@@ -118,7 +124,6 @@
               type="file"
               disabled
             />
-            
           </div>
           <div class="fields">
             <div
@@ -138,7 +143,7 @@
             </div>
           </div>
           <div class="action-form">
-            <a class="cancel-button" href="/homepage">キャンセル</a>
+            <a class="cancel-button" href="/">キャンセル</a>
             <a class="register-button" @click="editCreativeWork">編集</a>
           </div>
         </div>
@@ -169,6 +174,7 @@ export default {
         sale_start_date: '',
         copyright_categories: []
       },
+      creatorId: '',
       groups: [],
       creativeWorkFromDb: [],
       pickedSubgenres: [],
@@ -185,7 +191,7 @@ export default {
       )
       .then(response => {
         this.creativeWorkFromDb = response.data
-        console.log(this.creativeWorkFromDb)
+        this.creatorId = this.creativeWorkFromDb.creator_ids[0]
         for (let i = 0; i < this.subGenres.length; i++) {
           if (
             this.subGenres[i].genres.toString() ===
@@ -250,14 +256,19 @@ export default {
       this.formElements.creative_work_name = this.creativeWorkFromDb.name
       this.formElements.creative_work_genre = this.creativeWorkFromDb.genre
       this.formElements.creative_work_sub_genre = this.creativeWorkFromDb.sub_genre
-      this.formElements.release_date = this.creativeWorkFromDb.release_date.replaceAll('-', '')
-      this.formElements.sale_start_date = this.creativeWorkFromDb.sale_start_date.replaceAll('-', '')
+      this.formElements.release_date = this.creativeWorkFromDb.release_date.replaceAll(
+        '-',
+        ''
+      )
+      this.formElements.sale_start_date = this.creativeWorkFromDb.sale_start_date.replaceAll(
+        '-',
+        ''
+      )
       axios
         .patch(
           'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/creative_works/' +
             this.$route.query.creative_work_id,
           JSON.stringify(this.formElements)
-          
         )
         .then(response => {
           window.location.href = '/'
@@ -300,7 +311,6 @@ body {
   width: 150px;
   float: left;
   display: flex;
-  
 }
 .fields label {
   color: #000000de;
@@ -312,7 +322,7 @@ body {
   text-align: left;
   margin-bottom: 0.5rem;
 }
-#input-text {
+input[id*='input-text'] {
   width: 100%;
   padding: 10px 6px;
   border: 1px solid #dedede;
@@ -349,7 +359,7 @@ input[id*='input-button-delete'] {
   cursor: pointer;
 }
 .radio-field {
-  width: 40%;
+  width: 30%;
   float: left;
   text-align: left;
   margin-bottom: 1rem;

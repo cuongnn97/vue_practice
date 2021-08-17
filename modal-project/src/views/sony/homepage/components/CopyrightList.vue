@@ -57,7 +57,7 @@
               >
               <a
                 class="download-creative-work"
-                :href="'/audio/download?creative_work_id=' + ownedCopyright.id"
+                @click="downloadOrchardFiles(ownedCopyright.id)"
                 >Download</a
               >
             </td>
@@ -69,7 +69,7 @@
         target="_blank"
         data-no-turbolink="false"
         id="user_orchard"
-        @click="downloadOrchardFiles"
+        @click="downloadOrchardFiles(ownedCopyrightIds.toString())"
         >チェックした曲のThe Orchard Bulk Uploadファイルをダウンロード</a
       >
     </div>
@@ -147,15 +147,14 @@ export default {
         this.ownedCopyrightIds.push(id)
       }
     },
-    downloadOrchardFiles() {
-      if (this.ownedCopyrightIds.length > 0) {
+    downloadOrchardFiles(creative_work_ids) {
+      if (creative_work_ids !== '') {
         axios
           .post(
             'https://9gfglk4kul.execute-api.ap-northeast-1.amazonaws.com/prod/v1/orchard',
-            {"creative_work_ids" : this.ownedCopyrightIds.toString()}
+            {"creative_work_ids" : creative_work_ids}
           )
           .then(response => {
-            console.log(response)
             window.open('https://bc-secure-storage-api-cuongnn-bucket83908e77-nczm2ffo15wh.s3.ap-northeast-1.amazonaws.com/' + response.data.s3_key)
           })
           .catch(error => {
@@ -254,5 +253,8 @@ td a {
   font-size: 14px;
   max-width: 436px;
   width: 100%;
+}
+a:hover {
+  cursor: pointer;
 }
 </style>

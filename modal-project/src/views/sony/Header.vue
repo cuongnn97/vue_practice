@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="logo">
-      <a href="/homepage">
+      <a href="/">
         <img src="../../assets/sonylogo.png" alt="a" />
       </a>
     </div>
